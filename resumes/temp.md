@@ -1,3 +1,0 @@
-- pesquisar por LTSM, RNN, Arquitetura Encoder-Decoder
-- explicar o codigo visto em V?
-- Verificar os generators
