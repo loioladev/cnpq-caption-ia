@@ -110,4 +110,18 @@ Os \texit{datasets} relacionados com detecção de objetos podem ser divididos e
 
 \section*{Coleção de imagens}
 
+O \textit{dataset} tem o foco em objetos, ou seja, pessoas, carros, cadeiras, etc. e nao possui foco em coisas que geralmente nao tem limites, como ruas, grama, ceu. Alem disso, as categorias sao limitadas a termos basicos, frequentemente usados por humanos, como utilizar a categoria "cachorro" ao inves de "pastor-alemao" ou outras racas.
+
+\section*{Anotacoes de imagens}
+
+Essa secao demonstra o processo para criar o \textit{dataset MS-COCO}.
+
+A primeira etapa foi definir quais categorias estavam presentes em cada imagem. Apos isso, todas as instancias dos objetos de certa categoria sao rotuladas. Dessa forma, o estagio final e segmentar cada instancia do objeto na imagem. Apos essas tres etapas, os experts analisaram o resultado e verificaram quais imagens precisariam de revisao. Por fim, foram adicionadas cinco legendas para cada imagem no \textit{dataset}.
+
+\section*{Estatisticas e resultados finais}
+
+O \textit{MS COCO} foi desenvolvido para deteccao e segmentacao de objetos em seu contexto natural. O \textit{dataset} foi separado em 50$\%$ das imagens para treinamento, 25$\%$ para validacao e teste.
+
+E notavel, tambem, que em comparacao com o \textit{PASCAL VOC}, existe uma diferenca de performance com o \textit{dataset MS COCO}, visto que ele possui imagens mais dificeis (nao iconicas) nas quais os objetos sao parcialmente ocultos.
+
 \end{document}
