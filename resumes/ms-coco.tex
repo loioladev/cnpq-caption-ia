@@ -82,46 +82,45 @@
 	
 \maketitle
 
+\tableofcontents
+
 \section*{Introdução}
 
-Compreender cenas é um processo que possui inúmeras etapas, visto que é necessário compreender os atributos da cena, a relação entre eles, e o desenvolvimento de uma semântica para descrevê-los. Um exemplo que ajudou nessa compreensão é o \texit{dataset ImageNet}, que possibilitou inúmeras descobertas nas áreas de classificação e detecção de objetos. 
+Compreender cenas é um processo que possui inúmeras etapas, visto que é necessário compreender os atributos da cena, a relação entre eles, e o desenvolvimento de uma semântica para descrevê-los. Um exemplo que ajudou nessa compreensão é o \textit{dataset ImageNet}, que possibilitou inúmeras descobertas nas áreas de classificação e detecção de objetos. 
 
-Assim, o artigo introduz um novo \texit{dataset}, que é focado na \textbf{detecção visual de objetos, contextualização entre objetos e a localização precisa deles em imagens não iconicas}, para que seja possível avançar nas pesquisas de detecção de contexto e cenas, sem focar em apenas objetos isolados.
+Assim, o artigo introduz um novo \textit{dataset}, que é focado na \textbf{detecção visual de objetos, contextualização entre objetos e a localização precisa deles em imagens não icônicas}, para que seja possível avançar nas pesquisas de detecção de contexto e cenas, sem focar em apenas objetos isolados (imagens icônicas).
 
-Dessa forma, para atingir esse objetivo, foi agrupado imagens contendo relações contextuais e visualizações não icônicas, ou seja, os objetos estão fora do foco na imagem. O \textit{dataset} possui 91 categorias com 82 delas contendo mais do que 5000 imagens. A ideia do \textit{dataset} também é ter menos categorias, mas ter mais intânscias por categoria.
+Dessa forma, para atingir esse objetivo, foram agrupadas imagens contendo relações contextuais e visualizações não icônicas, ou seja, os objetos estão fora do foco na imagem. O \textit{dataset} possui 91 categorias com 82 delas contendo mais do que 5000 imagens. A ideia do \textit{dataset} também é ter menos categorias, mas ter mais instâncias por categoria.
 
 \section*{Trabalho relacionado}
 
-Os \texit{datasets} relacionados com detecção de objetos podem ser divididos em três grupos: aqueles que se referem a classificação de objetos, detecção de objetos ou rotulagem semântica da cena.
+Os \textit{datasets} relacionados com detecção de objetos podem ser divididos em três grupos: aqueles que se referem a classificação de objetos, detecção de objetos ou rotulagem semântica da cena.
 
 \begin{itemize}
     \item
-    \textbf{Classificação de objetos}: A tarefa de classificação de objetos
-    requer rótulos binários indicando se os objetos são presente em uma imagem. O \textit{dataset} utilizado para isso pode ser o \textbf{ImageNet}, contendo mais de 22.000 categorias de objetos.
+    \textbf{Classificação de objetos}: A tarefa de classificação de objetos requer rótulos binários indicando se os objetos são presente em uma imagem. O \textit{dataset} utilizado para isso pode ser o \textbf{ImageNet}, contendo mais de 22.000 categorias de objetos.
 
     \item
-    \textbf{Detecção de objetos}: Detectar um objeto envolve tanto afirmar que um objeto pertencente a uma classe especificada e se ele está presente na imagem. O \textit{dataset} utilizado para isso pode ser o 
-    \textbf{PASCAL VOC}.
+    \textbf{Detecção de objetos}: Detectar um objeto envolve tanto afirmar que um objeto pertencente a uma classe especificada e se ele está presente na imagem. O \textit{dataset} utilizado para isso pode ser o \textbf{PASCAL VOC}.
 
     \item
-    \textbf{Rotulagem semântica de cenas}: A tarefa de rotular objetos semânticos em uma cena requer que cada pixel de uma cena imagem seja rotulada como pertencente a uma categoria, como céu, cadeira, chão...
-    O \textit{dataset} utilizado para isso pode ser o \textbf{SUN}.
+    \textbf{Rotulagem semântica de cenas}: A tarefa de rotular objetos semânticos em uma cena requer que cada pixel de uma cena imagem seja rotulada como pertencente a uma categoria, como céu, cadeira, chão... O \textit{dataset} utilizado para isso pode ser o \textbf{SUN}.
 \end{itemize}
 
 \section*{Coleção de imagens}
 
-O \textit{dataset} tem o foco em objetos, ou seja, pessoas, carros, cadeiras, etc. e nao possui foco em coisas que geralmente nao tem limites, como ruas, grama, ceu. Alem disso, as categorias sao limitadas a termos basicos, frequentemente usados por humanos, como utilizar a categoria "cachorro" ao inves de "pastor-alemao" ou outras racas.
+O \textit{dataset} tem o foco em objetos, ou seja, pessoas, carros, cadeiras, etc. e não possui foco em coisas que geralmente não tem limites, como ruas, grama ou céu. Além disso, as categorias são limitadas a termos básicos, frequentemente usados por humanos, como utilizar a categoria "cachorro" ao invés de "pastor-alemão" ou outras raças.
 
-\section*{Anotacoes de imagens}
+\section*{Anotações de imagens}
 
-Essa secao demonstra o processo para criar o \textit{dataset MS-COCO}.
+Essa seção demonstra o processo para criar o \textit{dataset MS-COCO}.
 
-A primeira etapa foi definir quais categorias estavam presentes em cada imagem. Apos isso, todas as instancias dos objetos de certa categoria sao rotuladas. Dessa forma, o estagio final e segmentar cada instancia do objeto na imagem. Apos essas tres etapas, os experts analisaram o resultado e verificaram quais imagens precisariam de revisao. Por fim, foram adicionadas cinco legendas para cada imagem no \textit{dataset}.
+A primeira etapa foi definir quais categorias estavam presentes em cada imagem. Após isso, todas as instâncias dos objetos de certa categoria são rotuladas. Dessa forma, o estagio final é segmentar cada instância do objeto na imagem. Apos essas três etapas, os pesquisadores analisam os resultados e verificaram quais imagens precisariam de revisão. Por fim, foram adicionadas cinco legendas para cada imagem no \textit{dataset}.
 
-\section*{Estatisticas e resultados finais}
+\section*{Estatísticas e resultados finais}
 
-O \textit{MS COCO} foi desenvolvido para deteccao e segmentacao de objetos em seu contexto natural. O \textit{dataset} foi separado em 50$\%$ das imagens para treinamento, 25$\%$ para validacao e teste.
+O \textit{MS COCO} foi desenvolvido para detecção e segmentação de objetos em seu contexto natural. O \textit{dataset} foi separado em 50$\%$ das imagens para treinamento, 25$\%$ para validação e teste.
 
-E notavel, tambem, que em comparacao com o \textit{PASCAL VOC}, existe uma diferenca de performance com o \textit{dataset MS COCO}, visto que ele possui imagens mais dificeis (nao iconicas) nas quais os objetos sao parcialmente ocultos.
+É notável, também, que em comparação com o \textit{PASCAL VOC}, existe uma diferença de performance entre o \textit{dataset MS COCO} ao treinar uma rede neural, visto que este último possui imagens mais difíceis (não icônicas) nas quais os objetos estão parcialmente ocultos.
 
 \end{document}
