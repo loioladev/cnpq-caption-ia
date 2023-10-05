@@ -1,0 +1,127 @@
+% O documento possui um erro de segurança por causa do comando -shell-escape na compilacao
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+% Colocar documento em portugues
+\usepackage[brazil]{babel}
+% Incluir asmmath e outras ferramentas matemátias
+\usepackage{mathtools}
+
+% Pacote para demonstração
+\usepackage{amsthm}
+
+% Pacote para cores
+\usepackage{xcolor}
+%\definecolor{pastelyellow}{HTML}{fdfd96} - Definir cor
+
+% Pacote matemático
+\usepackage{amsmath}
+
+% Pacote para imagens um ao lado da outra
+\usepackage{subfig}
+
+% Pacote e função para espaçamento 1.5
+\usepackage{setspace}
+\onehalfspacing%
+
+% Pacote para códigos
+\usepackage{minted}
+
+% Para representar símbolos dos conjuntos
+\usepackage{amsfonts}
+
+% Pacotes para plotar gráficos
+\usepackage{tikz, tkz-fct}
+\usepackage{pgfplots}
+\pgfplotsset{width=8cm,compat=1.9}
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+\usepackage{tikz-3dplot}
+
+% Pacote para incluir pdf na página
+\usepackage{pdfpages}
+
+% Pacore para definições
+\newtheorem{theorem}{Definição}
+
+% Gráficos
+\usepackage{blindtext}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+\usepackage{graphicx}
+
+% Quadradinho$
+\usepackage{amssymb}
+%Pacote para módulo
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+% Definir tamanho das margens
+\usepackage[inner=1.25in, outer=1in, top=1in, bottom=1in]{geometry}
+
+% Pacotes para cabeçalho{fancyhdr}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{lastpage} 
+% Pacotes para tabelas que atravessam a página
+\usepackage{longtable}
+% Pacote para a tabela
+\usepackage{float} 
+
+% Define cabeçalho
+\lhead{\today}
+\chead{}
+\rhead{Instituto Federal de Brasília}
+% Definir tamanho da linha do cabeçalho
+\renewcommand{\headrulewidth}{0.4pt}
+
+\title{Resumo: Flickr30k Entities: Collecting Region-to-Phrase Correspondences for
+Richer Image-to-Sentence Models}
+\author{De Matheus Loiola Pinto Curado Silva}
+\date{\today}
+% Reparar carácter invisível
+\DeclareUnicodeCharacter{2212}{-}
+
+\begin{document}
+	
+\maketitle
+
+\section*{Introdução}
+
+Existem poucos \textit{datasets} com a descrição de frases em regiões da imagem. A maioria dos métodos de legendagem tentam aprender mapeamentos diretamente de imagens inteiras a frases inteiras. Não por acaso, tais modelos tendem a reproduzir legendas genéricas a partir dos dados de treinamento, e tem uma perfomance ruim em imagens com composições inéditas, nas quais objetos podem ter sidos vistos no treinamento isoladamente, mas não em combinação com outros.
+
+A principal contribuição do artigo é providenciar um largo \textit{dataset} de descrição de imagens que contenha a descrição região-para-frase das imagens.
+
+Flickr30k contém 31.783 imagens que focam principalmente em pessoas e animais, e 158.915 legendas em inglês (5 por imagem). O \textit{dataset} Flickr30k Entities melhora o dataset Flickr30k ao identificar quais menções ao longo das legendas se referem a imagens no mesmo conjunto, resultando em 244.035 correntes de coreferência.
+
+\section*{Trabalhos relacionados}
+
+\subsection*{Descrições em nível de região}
+
+O conjunto de dados mais recente e em grande escala desse tipo é Microsoft Common Objects in Context (MSCOCO). No entanto, assim como nas Sentenças UIUC, as anotações em nível de região MSCOCO não estão vinculadas às legendas de forma alguma.
+
+Em vez de emparelhar imagens com uma legenda que resume a imagem inteira, alguns conjuntos de dados emparelham objetos específicos em uma imagem com descrições curtas, como o conjunto de dados ReferIt.
+
+\subsection*{Grounded Language Understanding}
+
+Grounded Language Understanding é a tarefa de aprender o significado das unidades de linguagem natural, e o problema mais comum da literatura é o legendamento automático das imagens.
+
+Para o artigo, os métodos vistos para esse problema são os que focam em associar uma região local da imagem em palavras ou frases de uma legenda.
+
+
+\section*{Estatísticas}
+
+O processo de anotação do \textit{dataset} identificou 513.644 entidades ou cenas, que foram linkadas com 244.035 correntes de coreferência. O processo de desenhar as bounding boxes geraram 275.775 bounding boxes nas 31.783 images.
+
+Objetos mencionados foram:
+
+\begin{itemize}
+\item Pessoas com $94.2\%$ de frequência.
+\item Animais com $12.0\%$ de frequência.
+\item Roupas e partes do corpo com $69.9\%$ e $28.0\%$ de frequência.
+\item Veículos e instrumentos com $13.8\%$ e $4.3\%$ de frequência, enquanto outros objetos são mencionados em $91.8\%$ das imagens.
+\end{itemize}
+
+\section*{Resultado do experimento}
+
+A principal motivação em coletar Flickr30k Entities é promover o desenvolvimento de métodos que podem raciocinar sobre correspondências detalhadas entre frases no texto e regiões em uma imagem. Para isso, eles propoem um benchmark para o problema da localização de frases.
+
+
+\end{document}
