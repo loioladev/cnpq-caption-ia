@@ -72,7 +72,7 @@
 % Definir tamanho da linha do cabeçalho
 \renewcommand{\headrulewidth}{0.4pt}
 
-\title{}
+\title{Resumo: SPICE -  Semantic Propositional Image Caption Evaluation}
 \author{De Matheus Loiola Pinto Curado Silva}
 \date{\today}
 % Reparar carácter invisível
@@ -82,6 +82,31 @@
 	
 \maketitle
 
+\section*{Introdução}
 
+O artigo diz que métricas automáticas de avaliação são primariamente sensíveis à sobreposição de n-gramas, o que não é necessário nem suficiente para tarefas de simulação de julgamento humano. Assim, o autor hipotetiza que o conteúdo da semântica proposicional é um componente importante para a avaliação da legenda humana, e propõe uma nova métrica automática de avaliação de legendas chamado SPICE, \textit{Semantic Propositional Image Caption Evaluation}.
+
+Avaliações abrangentes em uma variedade de modelos e conjuntos de dados indicam que o SPICE captura julgamentos humanos sobre legendas geradas por modelos melhores do que outras métricas automáticas. Além disso, o SPICE pode responder perguntas como "qual gerador de legendas entende melhor as cores?" e "Os geradores de legendas podem contar?"
+
+No artigo, apresentam essa nova métrica de avaliação automática de legendas de imagens que mede a qualidade das legendas geradas através da análise de seu conteúdo semântico. O método se assemelha muito ao julgamento humano, oferecendo a vantagem adicional de que o desempenho de qualquer modelo pode ser analisado com mais detalhes do que com outros métricas automatizadas.
+
+Eles estimamos a qualidade da legenda por transformar legendas candidatas e de referência em um representante semântico baseado em grafos e chamado de "scene graphs". Esse "scene graph" explicitamente encoda os objetos, atributos e relações achados nas legendas da imagem, abstraindo a maior parte lexicográfica e sintática da linguagem natural no processo.
+
+\section*{Métrica SPICE}
+
+Dado uma legenda candidata $c$ e um conjunto de legendas referência $S$ associadas a imagem, o objetivo é computar uma pontuação que captura a similaridade entre $C$ e $S$. Como o algoritmo explora a estrutura semântica das descrições da cena, ela dá preferência a substantivos, e por isso é melhor em avaliar legendas geradas por computador. O SPICE foca exclusivamente no significado semântico.
+
+Ele utiliza o F-score, assim, sua pontuação está limitada entre 0 e 1. O SPICE mede o quão bem os geradores de legendas recuperam objetos, atributos e as relações entre eles. Uma preocupação potencial, então, é que a métrica poderia ser 'viciada', gerando legendas que representam apenas objetos, atributos e relações, ignorando outros aspectos importantes da gramática e da sintaxe. Como o SPICE negligencia a fluência, como acontece com as métricas de n-gramas, ele assume que as legendas são bem formadas.
+
+\section*{Avaliação da métrica}
+
+em testes realizados em uma competição do MS COCO, apenas o SPICE recompensou legendas detalhadas, enquanto outras métricas penalizaram essas legendas, como visto abaixo:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{avaliacao1.png}
+\end{figure}
+
+Em relação a percepção de cores e contagem, a métrica conseguiu avaliar bem a cor, quantidade e tamanho dos atributos nas legendas. Além disso, utilizando a correlação de Kendall's em nível de legenda, a métrica não se saiu muito diferentes das outras métricas criadas, porém, SPICE aproxima o julgamento humano melhor quando agregado com outras legendas.
 
 \end{document}
