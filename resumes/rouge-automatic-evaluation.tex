@@ -1,0 +1,87 @@
+% O documento possui um erro de segurança por causa do comando -shell-escape na compilacao
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+% Colocar documento em portugues
+\usepackage[brazil]{babel}
+% Incluir asmmath e outras ferramentas matemátias
+\usepackage{mathtools}
+
+% Pacote para demonstração
+\usepackage{amsthm}
+
+% Pacote para cores
+\usepackage{xcolor}
+%\definecolor{pastelyellow}{HTML}{fdfd96} - Definir cor
+
+% Pacote matemático
+\usepackage{amsmath}
+
+% Pacote para imagens um ao lado da outra
+\usepackage{subfig}
+
+% Pacote e função para espaçamento 1.5
+\usepackage{setspace}
+\onehalfspacing%
+
+% Pacote para códigos
+\usepackage{minted}
+
+% Para representar símbolos dos conjuntos
+\usepackage{amsfonts}
+
+% Pacotes para plotar gráficos
+\usepackage{tikz, tkz-fct}
+\usepackage{pgfplots}
+\pgfplotsset{width=8cm,compat=1.9}
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+\usepackage{tikz-3dplot}
+
+% Pacote para incluir pdf na página
+\usepackage{pdfpages}
+
+% Pacore para definições
+\newtheorem{theorem}{Definição}
+
+% Gráficos
+\usepackage{blindtext}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+\usepackage{graphicx}
+
+% Quadradinho$
+\usepackage{amssymb}
+%Pacote para módulo
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+% Definir tamanho das margens
+\usepackage[inner=1.25in, outer=1in, top=1in, bottom=1in]{geometry}
+
+% Pacotes para cabeçalho{fancyhdr}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{lastpage} 
+% Pacotes para tabelas que atravessam a página
+\usepackage{longtable}
+% Pacote para a tabela
+\usepackage{float} 
+
+% Define cabeçalho
+\lhead{\today}
+\chead{}
+\rhead{Instituto Federal de Brasília}
+% Definir tamanho da linha do cabeçalho
+\renewcommand{\headrulewidth}{0.4pt}
+
+\title{}
+\author{De Matheus Loiola Pinto Curado Silva}
+\date{\today}
+% Reparar carácter invisível
+\DeclareUnicodeCharacter{2212}{-}
+
+\begin{document}
+	
+\maketitle
+
+
+
+\end{document}
