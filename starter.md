@@ -16,3 +16,6 @@
     - [Rouge](https://www.youtube.com/watch?v=TMshhnrEXlg)
     - [Meteor](https://www.youtube.com/watch?v=FqQbrlEh_b0)
 
+# Referências
+
+- [Guia passo-a-passo de LSTM](https://towardsdatascience.com/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21)
