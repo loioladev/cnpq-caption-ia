@@ -1,0 +1,1240 @@
+# Dataset path, which includes the following datasets: VOC, LVIS
+path: /media/matheus/Game/College/cnpq_caption/datasets/caption
+train:
+  - images/voc_train2012
+  - images/voc_train2007
+  - images/voc_val2012
+  - images/lvis_train2017
+val:
+  - images/voc_val2007
+  - images/lvis_val2017
+
+# Classes
+names:
+  # VOC ===========
+  0: aeroplane
+  1: bicycle
+  2: bird
+  3: boat
+  4: bottle
+  5: bus
+  6: car
+  7: cat
+  8: chair
+  9: cow
+  10: diningtable
+  11: dog
+  12: horse
+  13: motorbike
+  14: person
+  15: pottedplant
+  16: sheep
+  17: sofa
+  18: train
+  19: tvmonitor
+
+  # LVIS
+  20: aerosol can/spray can
+  21: air conditioner
+  22: airplane/aeroplane
+  23: alarm clock
+  24: alcohol/alcoholic beverage
+  25: alligator/gator
+  26: almond
+  27: ambulance
+  28: amplifier
+  29: anklet/ankle bracelet
+  30: antenna/aerial/transmitting aerial
+  31: apple
+  32: applesauce
+  33: apricot
+  34: apron
+  35: aquarium/fish tank
+  36: arctic/arctic type of shoe/galosh/golosh/rubber/rubber type of shoe/gumshoe
+  37: armband
+  38: armchair
+  39: armoire
+  40: armor/armour
+  41: artichoke
+  42: trash can/garbage can/wastebin/dustbin/trash barrel/trash bin
+  43: ashtray
+  44: asparagus
+  45: atomizer/atomiser/spray/sprayer/nebulizer/nebuliser
+  46: avocado
+  47: award/accolade
+  48: awning
+  49: ax/axe
+  50: baboon
+  51: baby buggy/baby carriage/perambulator/pram/stroller
+  52: basketball backboard
+  53: backpack/knapsack/packsack/rucksack/haversack
+  54: handbag/purse/pocketbook
+  55: suitcase/baggage/luggage
+  56: bagel/beigel
+  57: bagpipe
+  58: baguet/baguette
+  59: bait/lure
+  60: ball
+  61: ballet skirt/tutu
+  62: balloon
+  63: bamboo
+  64: banana
+  65: Band Aid
+  66: bandage
+  67: bandanna/bandana
+  68: banjo
+  69: banner/streamer
+  70: barbell
+  71: barge
+  72: barrel/cask
+  73: barrette
+  74: barrow/garden cart/lawn cart/wheelbarrow
+  75: baseball base
+  76: baseball
+  77: baseball bat
+  78: baseball cap/jockey cap/golf cap
+  79: baseball glove/baseball mitt
+  80: basket/handbasket
+  81: basketball
+  82: bass horn/sousaphone/tuba
+  83: bat/bat animal
+  84: bath mat
+  85: bath towel
+  86: bathrobe
+  87: bathtub/bathing tub
+  88: batter/batter food
+  89: battery
+  90: beachball
+  91: bead
+  92: bean curd/tofu
+  93: beanbag
+  94: beanie/beany
+  95: bear
+  96: bed
+  97: bedpan
+  98: bedspread/bedcover/bed covering/counterpane/spread
+  99: cow
+  100: beef/beef food/boeuf/boeuf food
+  101: beeper/pager
+  102: beer bottle
+  103: beer can
+  104: beetle
+  105: bell
+  106: bell pepper/capsicum
+  107: belt
+  108: belt buckle
+  109: bench
+  110: beret
+  111: bib
+  112: Bible
+  113: bicycle/bike/bike bicycle
+  114: visor/vizor
+  115: billboard
+  116: binder/ring-binder
+  117: binoculars/field glasses/opera glasses
+  118: bird
+  119: birdfeeder
+  120: birdbath
+  121: birdcage
+  122: birdhouse
+  123: birthday cake
+  124: birthday card
+  125: pirate flag
+  126: black sheep
+  127: blackberry
+  128: blackboard/chalkboard
+  129: blanket
+  130: blazer/sport jacket/sport coat/sports jacket/sports coat
+  131: blender/liquidizer/liquidiser
+  132: blimp
+  133: blinker/flasher
+  134: blouse
+  135: blueberry
+  136: gameboard
+  137: boat/ship/ship boat
+  138: bob/bobber/bobfloat
+  139: bobbin/spool/reel
+  140: bobby pin/hairgrip
+  141: boiled egg/coddled egg
+  142: bolo tie/bolo/bola tie/bola
+  143: deadbolt
+  144: bolt
+  145: bonnet
+  146: book
+  147: bookcase
+  148: booklet/brochure/leaflet/pamphlet
+  149: bookmark/bookmarker
+  150: boom microphone/microphone boom
+  151: boot
+  152: bottle
+  153: bottle opener
+  154: bouquet
+  155: bow/bow weapon
+  156: bow/bow decorative ribbons
+  157: bow-tie/bowtie
+  158: bowl
+  159: pipe bowl
+  160: bowler hat/bowler/derby hat/derby/plug hat
+  161: bowling ball
+  162: box
+  163: boxing glove
+  164: suspenders
+  165: bracelet/bangle
+  166: brass plaque
+  167: brassiere/bra/bandeau
+  168: bread-bin/breadbox
+  169: bread
+  170: breechcloth/breechclout/loincloth
+  171: bridal gown/wedding gown/wedding dress
+  172: briefcase
+  173: broccoli
+  174: broach
+  175: broom
+  176: brownie
+  177: brussels sprouts
+  178: bubble gum
+  179: bucket/pail
+  180: horse buggy
+  181: horned cow
+  182: bulldog
+  183: bulldozer/dozer
+  184: bullet train
+  185: bulletin board/notice board
+  186: bulletproof vest
+  187: bullhorn/megaphone
+  188: bun/roll
+  189: bunk bed
+  190: buoy
+  191: burrito
+  192: bus/bus vehicle/autobus/charabanc/double-decker/motorbus/motorcoach
+  193: business card
+  194: butter
+  195: butterfly
+  196: button
+  197: cab/cab taxi/taxi/taxicab
+  198: cabana
+  199: cabin car/caboose
+  200: cabinet
+  201: locker/storage locker
+  202: cake
+  203: calculator
+  204: calendar
+  205: calf
+  206: camcorder
+  207: camel
+  208: camera
+  209: camera lens
+  210: camper/camper vehicle/camping bus/motor home
+  211: can/tin can
+  212: can opener/tin opener
+  213: candle/candlestick
+  214: candle holder
+  215: candy bar
+  216: candy cane
+  217: walking cane
+  218: canister/canister
+  219: canoe
+  220: cantaloup/cantaloupe
+  221: canteen
+  222: cap/cap headwear
+  223: bottle cap/cap/cap container lid
+  224: cape
+  225: cappuccino/coffee cappuccino
+  226: car/car automobile/auto/auto automobile/automobile
+  227: railcar/railcar part of a train/railway car/railway car part of a train/railroad car/railroad car part of a train
+  228: elevator car
+  229: car battery/automobile battery
+  230: identity card
+  231: card
+  232: cardigan
+  233: cargo ship/cargo vessel
+  234: carnation
+  235: horse carriage
+  236: carrot
+  237: tote bag
+  238: cart
+  239: carton
+  240: cash register/register/register for cash transactions
+  241: casserole
+  242: cassette
+  243: cast/plaster cast/plaster bandage
+  244: cat
+  245: cauliflower
+  246: cayenne/cayenne spice/cayenne pepper/cayenne pepper spice/red pepper/red pepper spice
+  247: CD player
+  248: celery
+  249: cellular telephone/cellular phone/cellphone/mobile phone/smart phone
+  250: chain mail/ring mail/chain armor/chain armour/ring armor/ring armour
+  251: chair
+  252: chaise longue/chaise/daybed
+  253: chalice
+  254: chandelier
+  255: chap
+  256: checkbook/chequebook
+  257: checkerboard
+  258: cherry
+  259: chessboard
+  260: chicken/chicken animal
+  261: chickpea/garbanzo
+  262: chili/chili vegetable/chili pepper/chili pepper vegetable/chilli/chilli vegetable/chilly/chilly vegetable/chile/chile vegetable
+  263: chime/gong
+  264: chinaware
+  265: crisp/crisp potato chip/potato chip
+  266: poker chip
+  267: chocolate bar
+  268: chocolate cake
+  269: chocolate milk
+  270: chocolate mousse
+  271: choker/collar/neckband
+  272: chopping board/cutting board/chopping block
+  273: chopstick
+  274: Christmas tree
+  275: slide
+  276: cider/cyder
+  277: cigar box
+  278: cigarette
+  279: cigarette case/cigarette pack
+  280: cistern/water tank
+  281: clarinet
+  282: clasp
+  283: cleansing agent/cleanser/cleaner
+  284: cleat/cleat for securing rope
+  285: clementine
+  286: clip
+  287: clipboard
+  288: clippers/clippers for plants
+  289: cloak
+  290: clock/timepiece/timekeeper
+  291: clock tower
+  292: clothes hamper/laundry basket/clothes basket
+  293: clothespin/clothes peg
+  294: clutch bag
+  295: coaster
+  296: coat
+  297: coat hanger/clothes hanger/dress hanger
+  298: coatrack/hatrack
+  299: cock/rooster
+  300: cockroach
+  301: cocoa/cocoa beverage/hot chocolate/hot chocolate beverage/drinking chocolate
+  302: coconut/cocoanut
+  303: coffee maker/coffee machine
+  304: coffee table/cocktail table
+  305: coffeepot
+  306: coil
+  307: coin
+  308: colander/cullender
+  309: coleslaw/slaw
+  310: coloring material/colouring material
+  311: combination lock
+  312: pacifier/teething ring
+  313: comic book
+  314: compass
+  315: computer keyboard/keyboard/keyboard computer
+  316: condiment
+  317: cone/traffic cone
+  318: control/controller
+  319: convertible/convertible automobile
+  320: sofa bed
+  321: cooker
+  322: cookie/cooky/biscuit/biscuit cookie
+  323: cooking utensil
+  324: cooler/cooler for food/ice chest
+  325: cork/cork bottle plug/bottle cork
+  326: corkboard
+  327: corkscrew/bottle screw
+  328: edible corn/corn/maize
+  329: cornbread
+  330: cornet/horn/trumpet
+  331: cornice/valance/valance board/pelmet
+  332: cornmeal
+  333: corset/girdle
+  334: costume
+  335: cougar/puma/catamount/mountain lion/panther
+  336: coverall
+  337: cowbell
+  338: cowboy hat/ten-gallon hat
+  339: crab/crab animal
+  340: crabmeat
+  341: cracker
+  342: crape/crepe/French pancake
+  343: crate
+  344: crayon/wax crayon
+  345: cream pitcher
+  346: crescent roll/croissant
+  347: crib/cot
+  348: crock pot/earthenware jar
+  349: crossbar
+  350: crouton
+  351: crow
+  352: crowbar/wrecking bar/pry bar
+  353: crown
+  354: crucifix
+  355: cruise ship/cruise liner
+  356: police cruiser/patrol car/police car/squad car
+  357: crumb
+  358: crutch
+  359: cub/cub animal
+  360: cube/square block
+  361: cucumber/cuke
+  362: cufflink
+  363: cup
+  364: trophy cup
+  365: cupboard/closet
+  366: cupcake
+  367: hair curler/hair roller/hair crimper
+  368: curling iron
+  369: curtain/drapery
+  370: cushion
+  371: cylinder
+  372: cymbal
+  373: dagger
+  374: dalmatian
+  375: dartboard
+  376: date/date fruit
+  377: deck chair/beach chair
+  378: deer/cervid
+  379: dental floss/floss
+  380: desk
+  381: detergent
+  382: diaper
+  383: diary/journal
+  384: die/dice
+  385: dinghy/dory/rowboat
+  386: dining table
+  387: tux/tuxedo
+  388: dish
+  389: dish antenna
+  390: dishrag/dishcloth
+  391: dishtowel/tea towel
+  392: dishwasher/dishwashing machine
+  393: dishwasher detergent/dishwashing detergent/dishwashing liquid/dishsoap
+  394: dispenser
+  395: diving board
+  396: Dixie cup/paper cup
+  397: dog
+  398: dog collar
+  399: doll
+  400: dollar/dollar bill/one dollar bill
+  401: dollhouse/doll's house
+  402: dolphin
+  403: domestic ass/donkey
+  404: doorknob/doorhandle
+  405: doormat/welcome mat
+  406: doughnut/donut
+  407: dove
+  408: dragonfly
+  409: drawer
+  410: underdrawers/boxers/boxershorts
+  411: dress/frock
+  412: dress hat/high hat/opera hat/silk hat/top hat
+  413: dress suit
+  414: dresser
+  415: drill
+  416: drone
+  417: dropper/eye dropper
+  418: drum/drum musical instrument
+  419: drumstick
+  420: duck
+  421: duckling
+  422: duct tape
+  423: duffel bag/duffle bag/duffel/duffle
+  424: dumbbell
+  425: dumpster
+  426: dustpan
+  427: eagle
+  428: earphone/earpiece/headphone
+  429: earplug
+  430: earring
+  431: easel
+  432: eclair
+  433: eel
+  434: egg/eggs
+  435: egg roll/spring roll
+  436: egg yolk/yolk/yolk egg
+  437: eggbeater/eggwhisk
+  438: eggplant/aubergine
+  439: electric chair
+  440: refrigerator
+  441: elephant
+  442: elk/moose
+  443: envelope
+  444: eraser
+  445: escargot
+  446: eyepatch
+  447: falcon
+  448: fan
+  449: faucet/spigot/tap
+  450: fedora
+  451: ferret
+  452: Ferris wheel
+  453: ferry/ferryboat
+  454: fig/fig fruit
+  455: fighter jet/fighter aircraft/attack aircraft
+  456: figurine
+  457: file cabinet/filing cabinet
+  458: file/file tool
+  459: fire alarm/smoke alarm
+  460: fire engine/fire truck
+  461: fire extinguisher/extinguisher
+  462: fire hose
+  463: fireplace
+  464: fireplug/fire hydrant/hydrant
+  465: first-aid kit
+  466: fish
+  467: fish/fish food
+  468: fishbowl/goldfish bowl
+  469: fishing rod/fishing pole
+  470: flag
+  471: flagpole/flagstaff
+  472: flamingo
+  473: flannel
+  474: flap
+  475: flash/flashbulb
+  476: flashlight/torch
+  477: fleece
+  478: flip-flop/flip-flop sandal
+  479: flipper/flipper footwear/fin/fin footwear
+  480: flower arrangement/floral arrangement
+  481: flute glass/champagne flute
+  482: foal
+  483: folding chair
+  484: food processor
+  485: football/football American
+  486: football helmet
+  487: footstool/footrest
+  488: fork
+  489: forklift
+  490: freight car
+  491: French toast
+  492: freshener/air freshener
+  493: frisbee
+  494: frog/toad/toad frog
+  495: fruit juice
+  496: frying pan/frypan/skillet
+  497: fudge
+  498: funnel
+  499: futon
+  500: gag/muzzle
+  501: garbage
+  502: garbage truck
+  503: garden hose
+  504: gargle/mouthwash
+  505: gargoyle
+  506: garlic/ail
+  507: gasmask/respirator/gas helmet
+  508: gazelle
+  509: gelatin/jelly
+  510: gemstone
+  511: generator
+  512: giant panda/panda/panda bear
+  513: gift wrap
+  514: ginger/gingerroot
+  515: giraffe
+  516: cincture/sash/waistband/waistcloth
+  517: glass/glass drink container/drinking glass
+  518: globe
+  519: glove
+  520: goat
+  521: goggles
+  522: goldfish
+  523: golf club/golf-club
+  524: golfcart
+  525: gondola/gondola boat
+  526: goose
+  527: gorilla
+  528: gourd
+  529: grape
+  530: grater
+  531: gravestone/headstone/tombstone
+  532: gravy boat/gravy holder
+  533: green bean
+  534: green onion/spring onion/scallion
+  535: griddle
+  536: grill/grille/grillwork/radiator grille
+  537: grits/hominy grits
+  538: grizzly/grizzly bear
+  539: grocery bag
+  540: guitar
+  541: gull/seagull
+  542: gun
+  543: hairbrush
+  544: hairnet
+  545: hairpin
+  546: halter top
+  547: ham/jambon/gammon
+  548: hamburger/beefburger/burger
+  549: hammer
+  550: hammock
+  551: hamper
+  552: hamster
+  553: hair dryer
+  554: hand glass/hand mirror
+  555: hand towel/face towel
+  556: handcart/pushcart/hand truck
+  557: handcuff
+  558: handkerchief
+  559: handle/grip/handgrip
+  560: handsaw/carpenter's saw
+  561: hardback book/hardcover book
+  562: harmonium/organ/organ musical instrument/reed organ/reed organ musical instrument
+  563: hat
+  564: hatbox
+  565: veil
+  566: headband
+  567: headboard
+  568: headlight/headlamp
+  569: headscarf
+  570: headset
+  571: headstall/headstall for horses/headpiece/headpiece for horses
+  572: heart
+  573: heater/warmer
+  574: helicopter
+  575: helmet
+  576: heron
+  577: highchair/feeding chair
+  578: hinge
+  579: hippopotamus
+  580: hockey stick
+  581: hog/pig
+  582: home plate/home plate baseball/home base/home base baseball
+  583: honey
+  584: fume hood/exhaust hood
+  585: hook
+  586: hookah/narghile/nargileh/sheesha/shisha/water pipe
+  587: hornet
+  588: horse
+  589: hose/hosepipe
+  590: hot-air balloon
+  591: hotplate
+  592: hot sauce
+  593: hourglass
+  594: houseboat
+  595: hummingbird
+  596: hummus/humus/hommos/hoummos/humous
+  597: polar bear
+  598: icecream
+  599: popsicle
+  600: ice maker
+  601: ice pack/ice bag
+  602: ice skate
+  603: igniter/ignitor/lighter
+  604: inhaler/inhalator
+  605: iPod
+  606: iron/iron for clothing/smoothing iron/smoothing iron for clothing
+  607: ironing board
+  608: jacket
+  609: jam
+  610: jar
+  611: jean/blue jean/denim
+  612: jeep/landrover
+  613: jelly bean/jelly egg
+  614: jersey/T-shirt/tee shirt
+  615: jet plane/jet-propelled plane
+  616: jewel/gem/precious stone
+  617: jewelry/jewellery
+  618: joystick
+  619: jumpsuit
+  620: kayak
+  621: keg
+  622: kennel/doghouse
+  623: kettle/boiler
+  624: key
+  625: keycard
+  626: kilt
+  627: kimono
+  628: kitchen sink
+  629: kitchen table
+  630: kite
+  631: kitten/kitty
+  632: kiwi fruit
+  633: knee pad
+  634: knife
+  635: knitting needle
+  636: knob
+  637: knocker/knocker on a door/doorknocker
+  638: koala/koala bear
+  639: lab coat/laboratory coat
+  640: ladder
+  641: ladle
+  642: ladybug/ladybeetle/ladybird beetle
+  643: lamb/lamb animal
+  644: lamb-chop/lambchop
+  645: lamp
+  646: lamppost
+  647: lampshade
+  648: lantern
+  649: lanyard/laniard
+  650: laptop computer/notebook computer
+  651: lasagna/lasagne
+  652: latch
+  653: lawn mower
+  654: leather
+  655: legging/legging clothing/leging/leging clothing/leg covering
+  656: Lego/Lego set
+  657: legume
+  658: lemon
+  659: lemonade
+  660: lettuce
+  661: license plate/numberplate
+  662: life buoy/lifesaver/life belt/life ring
+  663: life jacket/life vest
+  664: lightbulb
+  665: lightning rod/lightning conductor
+  666: lime
+  667: limousine
+  668: lion
+  669: lip balm
+  670: liquor/spirits/hard liquor/liqueur/cordial
+  671: lizard
+  672: log
+  673: lollipop
+  674: speaker/speaker stereo equipment
+  675: loveseat
+  676: machine gun
+  677: magazine
+  678: magnet
+  679: mail slot
+  680: mailbox/mailbox at home/letter box/letter box at home
+  681: mallard
+  682: mallet
+  683: mammoth
+  684: manatee
+  685: mandarin orange
+  686: manager/through
+  687: manhole
+  688: map
+  689: marker
+  690: martini
+  691: mascot
+  692: mashed potato
+  693: masher
+  694: mask/facemask
+  695: mast
+  696: mat/mat gym equipment/gym mat
+  697: matchbox
+  698: mattress
+  699: measuring cup
+  700: measuring stick/ruler/ruler measuring stick/measuring rod
+  701: meatball
+  702: medicine
+  703: melon
+  704: microphone
+  705: microscope
+  706: microwave oven
+  707: milestone/milepost
+  708: milk
+  709: milk can
+  710: milkshake
+  711: minivan
+  712: mint candy
+  713: mirror
+  714: mitten
+  715: mixer/mixer kitchen tool/stand mixer
+  716: money
+  717: monitor/monitor computer equipment
+  718: monkey
+  719: motor
+  720: motor scooter/scooter
+  721: motor vehicle/automotive vehicle
+  722: motorcycle
+  723: mound/mound baseball/pitcher's mound
+  724: mouse/mouse computer equipment/computer mouse
+  725: mousepad
+  726: muffin
+  727: mug
+  728: mushroom
+  729: music stool/piano stool
+  730: musical instrument/instrument/instrument musical
+  731: nailfile
+  732: napkin/table napkin/serviette
+  733: neckerchief
+  734: necklace
+  735: necktie/tie/tie necktie
+  736: needle
+  737: nest
+  738: newspaper/paper/paper newspaper
+  739: newsstand
+  740: nightshirt/nightwear/sleepwear/nightclothes
+  741: nosebag/nosebag for animals/feedbag
+  742: noseband/noseband for animals/nosepiece/nosepiece for animals
+  743: notebook
+  744: notepad
+  745: nut
+  746: nutcracker
+  747: oar
+  748: octopus/octopus food
+  749: octopus/octopus animal
+  750: oil lamp/kerosene lamp/kerosine lamp
+  751: olive oil
+  752: omelet/omelette
+  753: onion
+  754: orange/orange fruit
+  755: orange juice
+  756: ostrich
+  757: ottoman/pouf/pouffe/hassock
+  758: oven
+  759: overalls/overalls clothing
+  760: owl
+  761: packet
+  762: inkpad/inking pad/stamp pad
+  763: pad
+  764: paddle/boat paddle
+  765: padlock
+  766: paintbrush
+  767: painting
+  768: pajamas/pyjamas
+  769: palette/pallet
+  770: pan/pan for cooking/cooking pan
+  771: pan/pan metal container
+  772: pancake
+  773: pantyhose
+  774: papaya
+  775: paper plate
+  776: paper towel
+  777: paperback book/paper-back book/softback book/soft-cover book
+  778: paperweight
+  779: parachute
+  780: parakeet/parrakeet/parroket/paraquet/paroquet/parroquet
+  781: parasail/parasail sports
+  782: parasol/sunshade
+  783: parchment
+  784: parka/anorak
+  785: parking meter
+  786: parrot
+  787: passenger car/passenger car part of a train/coach/coach part of a train
+  788: passenger ship
+  789: passport
+  790: pastry
+  791: patty/patty food
+  792: pea/pea food
+  793: peach
+  794: peanut butter
+  795: pear
+  796: peeler/peeler tool for fruit and vegetables
+  797: wooden leg/pegleg
+  798: pegboard
+  799: pelican
+  800: pen
+  801: pencil
+  802: pencil box/pencil case
+  803: pencil sharpener
+  804: pendulum
+  805: penguin
+  806: pennant
+  807: penny/penny coin
+  808: pepper/peppercorn
+  809: pepper mill/pepper grinder
+  810: perfume
+  811: persimmon
+  812: person/baby/child/boy/girl/man/woman/human
+  813: pet
+  814: pew/pew church bench/church bench
+  815: phonebook/telephone book/telephone directory
+  816: phonograph record/phonograph recording/record/record phonograph recording
+  817: piano
+  818: pickle
+  819: pickup truck
+  820: pie
+  821: pigeon
+  822: piggy bank/penny bank
+  823: pillow
+  824: pin/pin non jewelry
+  825: pineapple
+  826: pinecone
+  827: ping-pong ball
+  828: pinwheel
+  829: tobacco pipe
+  830: pipe/piping
+  831: pistol/handgun
+  832: pita/pita bread/pocket bread
+  833: pitcher/pitcher vessel for liquid/ewer
+  834: pitchfork
+  835: pizza
+  836: place mat
+  837: plate
+  838: platter
+  839: playpen
+  840: pliers/plyers
+  841: plow/plow farm equipment/plough/plough farm equipment
+  842: plume
+  843: pocket watch
+  844: pocketknife
+  845: poker/poker fire stirring tool/stove poker/fire hook
+  846: pole/post
+  847: polo shirt/sport shirt
+  848: poncho
+  849: pony
+  850: pool table/billiard table/snooker table
+  851: pop/pop soda/soda/soda pop/tonic/soft drink
+  852: postbox/postbox public/mailbox/mailbox public
+  853: postcard/postal card/mailing-card
+  854: poster/placard
+  855: pot
+  856: flowerpot
+  857: potato
+  858: potholder
+  859: pottery/clayware
+  860: pouch
+  861: power shovel/excavator/digger
+  862: prawn/shrimp
+  863: pretzel
+  864: printer/printing machine
+  865: projectile/projectile weapon/missile
+  866: projector
+  867: propeller/propellor
+  868: prune
+  869: pudding
+  870: puffer/puffer fish/pufferfish/blowfish/globefish
+  871: puffin
+  872: pug-dog
+  873: pumpkin
+  874: puncher
+  875: puppet/marionette
+  876: puppy
+  877: quesadilla
+  878: quiche
+  879: quilt/comforter
+  880: rabbit
+  881: race car/racing car
+  882: racket/racquet
+  883: radar
+  884: radiator
+  885: radio receiver/radio set/radio/tuner/tuner radio
+  886: radish/daikon
+  887: raft
+  888: rag doll
+  889: raincoat/waterproof jacket
+  890: ram/ram animal
+  891: raspberry
+  892: rat
+  893: razorblade
+  894: reamer/reamer juicer/juicer/juice reamer
+  895: rearview mirror
+  896: receipt
+  897: recliner/reclining chair/lounger/lounger chair
+  898: record player/phonograph/phonograph record player/turntable
+  899: reflector
+  900: remote control
+  901: rhinoceros
+  902: rib/rib food
+  903: rifle
+  904: ring
+  905: river boat
+  906: road map
+  907: robe
+  908: rocking chair
+  909: rodent
+  910: roller skate
+  911: Rollerblade
+  912: rolling pin
+  913: root beer
+  914: router/router computer equipment
+  915: rubber band/elastic band
+  916: runner/runner carpet
+  917: plastic bag/paper bag
+  918: saddle/saddle on an animal
+  919: saddle blanket/saddlecloth/horse blanket
+  920: saddlebag
+  921: safety pin
+  922: sail
+  923: salad
+  924: salad plate/salad bowl
+  925: salami
+  926: salmon/salmon fish
+  927: salmon/salmon food
+  928: salsa
+  929: saltshaker
+  930: sandal/sandal type of shoe
+  931: sandwich
+  932: satchel
+  933: saucepan
+  934: saucer
+  935: sausage
+  936: sawhorse/sawbuck
+  937: saxophone
+  938: scale/scale measuring instrument
+  939: scarecrow/strawman
+  940: scarf
+  941: school bus
+  942: scissors
+  943: scoreboard
+  944: scraper
+  945: screwdriver
+  946: scrubbing brush
+  947: sculpture
+  948: seabird/seafowl
+  949: seahorse
+  950: seaplane/hydroplane
+  951: seashell
+  952: sewing machine
+  953: shaker
+  954: shampoo
+  955: shark
+  956: sharpener
+  957: Sharpie
+  958: shaver/shaver electric/electric shaver/electric razor
+  959: shaving cream/shaving soap
+  960: shawl
+  961: shears
+  962: sheep
+  963: shepherd dog/sheepdog
+  964: sherbert/sherbet
+  965: shield
+  966: shirt
+  967: shoe/sneaker/sneaker type of shoe/tennis shoe
+  968: shopping bag
+  969: shopping cart
+  970: short pants/shorts/shorts clothing/trunks/trunks clothing
+  971: shot glass
+  972: shoulder bag
+  973: shovel
+  974: shower head
+  975: shower cap
+  976: shower curtain
+  977: shredder/shredder for paper
+  978: signboard
+  979: silo
+  980: sink
+  981: skateboard
+  982: skewer
+  983: ski
+  984: ski boot
+  985: ski parka/ski jacket
+  986: ski pole
+  987: skirt
+  988: skullcap
+  989: sled/sledge/sleigh
+  990: sleeping bag
+  991: sling/sling bandage/triangular bandage
+  992: slipper/slipper footwear/carpet slipper/carpet slipper footwear
+  993: smoothie
+  994: snake/serpent
+  995: snowboard
+  996: snowman
+  997: snowmobile
+  998: soap
+  999: soccer ball
+  1000: sock
+  1001: sofa/couch/lounge
+  1002: softball
+  1003: solar array/solar battery/solar panel
+  1004: sombrero
+  1005: soup
+  1006: soup bowl
+  1007: soupspoon
+  1008: sour cream/soured cream
+  1009: soya milk/soybean milk/soymilk
+  1010: space shuttle
+  1011: sparkler/sparkler fireworks
+  1012: spatula
+  1013: spear/lance
+  1014: spectacles/specs/eyeglasses/glasses
+  1015: spice rack
+  1016: spider
+  1017: crawfish/crayfish
+  1018: sponge
+  1019: spoon
+  1020: sportswear/athletic wear/activewear
+  1021: spotlight
+  1022: squid/squid food/calamari/calamary
+  1023: squirrel
+  1024: stagecoach
+  1025: stapler/stapler stapling machine
+  1026: starfish/sea star
+  1027: statue/statue sculpture
+  1028: steak/steak food
+  1029: steak knife
+  1030: steering wheel
+  1031: stepladder
+  1032: step stool
+  1033: stereo/stereo sound system
+  1034: stew
+  1035: stirrer
+  1036: stirrup
+  1037: stool
+  1038: stop sign
+  1039: brake light
+  1040: stove/kitchen stove/range/range kitchen appliance/kitchen range/cooking stove
+  1041: strainer
+  1042: strap
+  1043: straw/straw for drinking/drinking straw
+  1044: strawberry
+  1045: street sign
+  1046: streetlight/street lamp
+  1047: string cheese
+  1048: stylus
+  1049: subwoofer
+  1050: sugar bowl
+  1051: sugarcane/sugarcane plant
+  1052: suit/suit clothing
+  1053: sunflower
+  1054: sunglasses
+  1055: sunhat
+  1056: surfboard
+  1057: sushi
+  1058: mop
+  1059: sweat pants
+  1060: sweatband
+  1061: sweater
+  1062: sweatshirt
+  1063: sweet potato
+  1064: swimsuit/swimwear/bathing suit/swimming costume/bathing costume/swimming trunks/bathing trunks
+  1065: sword
+  1066: syringe
+  1067: Tabasco sauce
+  1068: table-tennis table/ping-pong table
+  1069: table
+  1070: table lamp
+  1071: tablecloth
+  1072: tachometer
+  1073: taco
+  1074: tag
+  1075: taillight/rear light
+  1076: tambourine
+  1077: army tank/armored combat vehicle/armoured combat vehicle
+  1078: tank/tank storage vessel/storage tank
+  1079: tank top/tank top clothing
+  1080: tape/tape sticky cloth or paper
+  1081: tape measure/measuring tape
+  1082: tapestry
+  1083: tarp
+  1084: tartan/plaid
+  1085: tassel
+  1086: tea bag
+  1087: teacup
+  1088: teakettle
+  1089: teapot
+  1090: teddy bear
+  1091: telephone/phone/telephone set
+  1092: telephone booth/phone booth/call box/telephone box/telephone kiosk
+  1093: telephone pole/telegraph pole/telegraph post
+  1094: telephoto lens/zoom lens
+  1095: television camera/tv camera
+  1096: television set/tv/tv set
+  1097: tennis ball
+  1098: tennis racket
+  1099: tequila
+  1100: thermometer
+  1101: thermos bottle
+  1102: thermostat
+  1103: thimble
+  1104: thread/yarn
+  1105: thumbtack/drawing pin/pushpin
+  1106: tiara
+  1107: tiger
+  1108: tights/tights clothing/leotards
+  1109: timer/stopwatch
+  1110: tinfoil
+  1111: tinsel
+  1112: tissue paper
+  1113: toast/toast food
+  1114: toaster
+  1115: toaster oven
+  1116: toilet
+  1117: toilet tissue/toilet paper/bathroom tissue
+  1118: tomato
+  1119: tongs
+  1120: toolbox
+  1121: toothbrush
+  1122: toothpaste
+  1123: toothpick
+  1124: cover
+  1125: tortilla
+  1126: tow truck
+  1127: towel
+  1128: towel rack/towel rail/towel bar
+  1129: toy
+  1130: tractor/tractor farm equipment
+  1131: traffic light
+  1132: dirt bike
+  1133: trailer truck/tractor trailer/trucking rig/articulated lorry/semi truck
+  1134: train/train railroad vehicle/railroad train
+  1135: trampoline
+  1136: tray
+  1137: trench coat
+  1138: triangle/triangle musical instrument
+  1139: tricycle
+  1140: tripod
+  1141: trousers/pants/pants clothing
+  1142: truck
+  1143: truffle/truffle chocolate/chocolate truffle
+  1144: trunk
+  1145: vat
+  1146: turban
+  1147: turkey/turkey food
+  1148: turnip
+  1149: turtle
+  1150: turtleneck/turtleneck clothing/polo-neck
+  1151: typewriter
+  1152: umbrella
+  1153: underwear/underclothes/underclothing/underpants
+  1154: unicycle
+  1155: urinal
+  1156: urn
+  1157: vacuum cleaner
+  1158: vase
+  1159: vending machine
+  1160: vent/blowhole/air vent
+  1161: vest/waistcoat
+  1162: videotape
+  1163: vinegar
+  1164: violin/fiddle
+  1165: vodka
+  1166: volleyball
+  1167: vulture
+  1168: waffle
+  1169: waffle iron
+  1170: wagon
+  1171: wagon wheel
+  1172: walking stick
+  1173: wall clock
+  1174: wall socket/wall plug/electric outlet/electrical outlet/outlet/electric receptacle
+  1175: wallet/billfold
+  1176: walrus
+  1177: wardrobe
+  1178: washbasin/basin/basin for washing/washbowl/washstand/handbasin
+  1179: automatic washer/washing machine
+  1180: watch/wristwatch
+  1181: water bottle
+  1182: water cooler
+  1183: water faucet/water tap/tap/tap water faucet
+  1184: water heater/hot-water heater
+  1185: water jug
+  1186: water gun/squirt gun
+  1187: water scooter/sea scooter/jet ski
+  1188: water ski
+  1189: water tower
+  1190: watering can
+  1191: watermelon
+  1192: weathervane/vane/vane weathervane/wind vane
+  1193: webcam
+  1194: wedding cake/bridecake
+  1195: wedding ring/wedding band
+  1196: wet suit
+  1197: wheel
+  1198: wheelchair
+  1199: whipped cream
+  1200: whistle
+  1201: wig
+  1202: wind chime
+  1203: windmill
+  1204: window box/window box for plants
+  1205: windshield wiper/windscreen wiper/wiper/wiper for windshield or screen
+  1206: windsock/air sock/air-sleeve/wind sleeve/wind cone
+  1207: wine bottle
+  1208: wine bucket/wine cooler
+  1209: wineglass
+  1210: blinder/blinder for horses
+  1211: wok
+  1212: wolf
+  1213: wooden spoon
+  1214: wreath
+  1215: wrench/spanner
+  1216: wristband
+  1217: wristlet/wrist band
+  1218: yacht
+  1219: yogurt/yoghurt/yoghourt
+  1220: yoke/yoke animal equipment
+  1221: zebra
+  1222: zucchini/courgette
+
