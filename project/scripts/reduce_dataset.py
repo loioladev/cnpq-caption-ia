@@ -42,7 +42,6 @@ def verify_args(args: argparse.Namespace) -> None:
         raise ValueError("The percentage must be between 5 and 99.")
     if os.path.exists(args.output_dir):
         raise FileExistsError(f"Directory '{args.output_dir}' already exists.")
-    os.makedirs(args.output_dir)
 
 
 def read_label_file(file_path: str) -> dict:
@@ -91,6 +90,25 @@ def get_dataset_labels(label_dir: str, label_json_path: str) -> dict:
         with open(label_json_path, "w") as file:
             json.dump(labels, file)
     return labels
+
+
+def remove_many_instances(label_data: dict) -> dict:
+    """
+    Remove labels that have more than 50 instances of the same class.
+    :param label_data: A dictionary containing the labels of each file.
+    :return: A dictionary containing the labels of each file without many instances.
+    """
+    files_to_remove = []
+    for file_name, labels in label_data.items():
+        for label, count in labels.items():
+            if count >= 50:
+                files_to_remove.append(file_name)
+                break
+    for file_name in files_to_remove:
+        del label_data[file_name]
+    
+    print(f"Removed {len(files_to_remove)} files with many instances of the same class.")
+    return label_data
 
 
 def iterate_labels(
@@ -143,6 +161,7 @@ def create_subset(label_data: dict, output_dir: str, subset_size: int) -> None:
     :param output_dir: The path to the directory where the subset will be saved.
     :param subset_size: The number of files in the subset.
     """
+    os.makedirs(output_dir)
 
     # Insert the files in a dictionary grouped by label
     files_grouped_by_label = defaultdict(list)
@@ -217,6 +236,7 @@ def main():
 
     # Create subset of the dataset
     labels = get_dataset_labels(label_dir, label_json)
+    labels = remove_many_instances(labels)
     create_subset(labels, output_dir, subset_size)
 
     # Plot the comparison between the datasets
