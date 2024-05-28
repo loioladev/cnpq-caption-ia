@@ -69,9 +69,13 @@ def get_labels_from_directory(directory_path: str) -> dict:
     :return: A dictionary containing the labels of each file.
     """
     labels = dict()
-    for filename in os.listdir(directory_path):
-        file_path = os.path.join(directory_path, filename)
-        labels[file_path] = read_label_file(file_path)
+    files = os.listdir(directory_path)
+    total_files = len(files)
+    with tqdm(total=total_files, desc="Processing files") as pbar:
+        for file_name in files:
+            file_path = os.path.join(directory_path, file_name)
+            labels[file_path] = read_label_file(file_path)
+            pbar.update(1)
     return labels
 
 
