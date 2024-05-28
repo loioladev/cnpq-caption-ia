@@ -5,6 +5,7 @@ import shutil
 from collections import defaultdict
 
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 
 def parse_args() -> argparse.Namespace:
@@ -106,8 +107,10 @@ def remove_many_instances(label_data: dict) -> dict:
                 break
     for file_name in files_to_remove:
         del label_data[file_name]
-    
-    print(f"Removed {len(files_to_remove)} files with many instances of the same class.")
+
+    print(
+        f"Removed {len(files_to_remove)} files with many instances of the same class."
+    )
     return label_data
 
 
@@ -178,13 +181,15 @@ def create_subset(label_data: dict, output_dir: str, subset_size: int) -> None:
 
     # Create subset of the dataset in the output directory
     total_selected = 0
-    while total_selected < subset_size:
-        label_order, selected_file = iterate_labels(
-            label_data, files_grouped_by_label, label_order, output_dir
-        )
-        if not selected_file:
-            continue
-        total_selected += 1
+    with tqdm(total=subset_size) as pbar:
+        while total_selected < subset_size:
+            label_order, selected_file = iterate_labels(
+                label_data, files_grouped_by_label, label_order, output_dir
+            )
+            if not selected_file:
+                continue
+            total_selected += 1
+            pbar.update(1)
 
 
 def count_labels(label_data: dict) -> dict:
