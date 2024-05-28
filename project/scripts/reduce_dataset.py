@@ -157,7 +157,7 @@ def count_labels(label_data: dict) -> dict:
     count = defaultdict(int)
     for _, values in label_data.items():
         for label, value in values.items():
-            count[label] += value
+            count[str(label)] += value
     return count
 
 
@@ -171,19 +171,17 @@ def plot_data(count_original: dict, count_subset: dict) -> None:
     values_original = list(count_original.values())
     values_subset = list(count_subset.values())
 
-    bar_width = 0.35
-    fig, ax = plt.subplots()
+    plt.figure(figsize=(10, 6))
+    plt.bar(classes, values_original, color='blue', label='Original')
+    plt.bar(classes, values_subset, color='red', label='Subset')
 
-    ax.bar(classes, values_original, bar_width, label='Original')
-    ax.bar(classes, values_subset, bar_width, label='Subset')
-    
-    ax.set_xlabel('Classes')
-    ax.set_ylabel('Number of instances')
-    ax.set_title('Number of instances per class')
-    ax.legend()
+    plt.xlabel('Classes')
+    plt.ylabel('Number of instances')
+    plt.title('Number of instances per class')
+    plt.legend()
 
-    ax.xaxis.set_ticks([])
-    ax.set_ylim(0, max(values_subset) + 1)
+    plt.xticks([])
+    plt.ylim(0, max(max(values_original), max(values_subset)))
 
     plt.savefig(os.path.join(os.getcwd(), 'subset_distribution.png'))
 
@@ -197,14 +195,18 @@ def main():
     output_dir = args.output_dir
     subset_size = (args.percentage / 100) * len(os.listdir(label_dir))
   
+    # Create subset of the dataset
     labels = get_dataset_labels(label_dir, label_json)
     create_subset(labels, output_dir, subset_size)
 
+    # Plot the comparison between the datasets
     count_original = count_labels(labels)
     count_subset = count_labels(get_labels_from_directory(output_dir))
+    count_original = {k: count_original[k] for k in sorted(count_original)}
+    count_subset = {k: count_subset[k] for k in sorted(count_subset)}
     plot_data(count_original, count_subset)
 
-    print("Done!")
+    print("DONE")
 
 
 if __name__ == '__main__':
