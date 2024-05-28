@@ -1,20 +1,35 @@
+import argparse
 import json
 import os
 import shutil
 from collections import defaultdict
-import argparse
+
 import matplotlib.pyplot as plt
+
 
 def parse_args() -> argparse.Namespace:
     """
     Create parser for command line arguments.
     :return: The parsed arguments.
     """
-    parser = argparse.ArgumentParser(description='Create a subset of the original dataset.')
-    parser.add_argument('label_dir', type=str, help='The path to the directory containing the labels.')
-    parser.add_argument('output_dir', type=str, help='The path to the directory where the subset will be saved.')
-    parser.add_argument('percentage', type=int, help='The percentage of the original dataset that will be used [5-99]%.')
+    parser = argparse.ArgumentParser(
+        description="Create a subset of the original dataset."
+    )
+    parser.add_argument(
+        "label_dir", type=str, help="The path to the directory containing the labels."
+    )
+    parser.add_argument(
+        "output_dir",
+        type=str,
+        help="The path to the directory where the subset will be saved.",
+    )
+    parser.add_argument(
+        "percentage",
+        type=int,
+        help="The percentage of the original dataset that will be used [5-99]%.",
+    )
     return parser.parse_args()
+
 
 def verify_args(args: argparse.Namespace) -> None:
     """
@@ -28,7 +43,7 @@ def verify_args(args: argparse.Namespace) -> None:
     if os.path.exists(args.output_dir):
         raise FileExistsError(f"Directory '{args.output_dir}' already exists.")
     os.makedirs(args.output_dir)
-    
+
 
 def read_label_file(file_path: str) -> dict:
     """
@@ -36,10 +51,10 @@ def read_label_file(file_path: str) -> dict:
     :param file_path: The path to the file containing the labels.
     :return: A dictionary containing the labels of the file.
     """
-    with open(file_path, 'r') as file:
+    with open(file_path, "r") as file:
         lines = file.readlines()
-    labels = [int(line.split(' ')[0]) for line in lines]
-  
+    labels = [int(line.split(" ")[0]) for line in lines]
+
     label_counts = defaultdict(int)
     for label in labels:
         label_counts[label] += 1
@@ -59,6 +74,7 @@ def get_labels_from_directory(directory_path: str) -> dict:
         labels[file_path] = read_label_file(file_path)
     return labels
 
+
 def get_dataset_labels(label_dir: str, label_json_path: str) -> dict:
     """
     Get the labels of each file in the dataset.
@@ -67,17 +83,19 @@ def get_dataset_labels(label_dir: str, label_json_path: str) -> dict:
     :return: A dictionary containing the labels of each file.
     """
     if os.path.exists(label_json_path):
-        with open(label_json_path, 'r') as file:
+        with open(label_json_path, "r") as file:
             labels = json.load(file)
     else:
         labels = get_labels_from_directory(label_dir)
         print(f"Saving labels to '{label_json_path}'...")
-        with open(label_json_path, 'w') as file:
+        with open(label_json_path, "w") as file:
             json.dump(labels, file)
     return labels
 
 
-def iterate_labels(label_data: dict, files_grouped_by_label: dict, label_order: list, output_dir: str) -> tuple:
+def iterate_labels(
+    label_data: dict, files_grouped_by_label: dict, label_order: list, output_dir: str
+) -> tuple:
     """
     Iterate over labels to find the file to add to the subset and update label counts.
     :param label_data: A dictionary containing the labels of each file.
@@ -88,7 +106,7 @@ def iterate_labels(label_data: dict, files_grouped_by_label: dict, label_order: 
     """
     # Find the class with the lowest number of instances
     min_label_idx = 0
-    lowest_count = float('inf')
+    lowest_count = float("inf")
     for i, (count, label) in enumerate(label_order):
         if count < lowest_count:
             lowest_count = count
@@ -97,7 +115,7 @@ def iterate_labels(label_data: dict, files_grouped_by_label: dict, label_order: 
     # Select the file with the lowest number of instances
     selected_label = label_order[min_label_idx][1]
     if not files_grouped_by_label[selected_label]:
-        label_order[min_label_idx] = (float('inf'), selected_label)
+        label_order[min_label_idx] = (float("inf"), selected_label)
         return label_order, None
     selected_file, _ = files_grouped_by_label[selected_label].pop()
 
@@ -131,7 +149,7 @@ def create_subset(label_data: dict, output_dir: str, subset_size: int) -> None:
     for file_name, label_info in label_data.items():
         for label, count in label_info.items():
             files_grouped_by_label[label].append((file_name, count))
-    
+
     # Sort the files inside classes by the number of labels in descending order
     for label, files in files_grouped_by_label.items():
         files_grouped_by_label[label] = sorted(files, key=lambda x: x[1], reverse=True)
@@ -142,11 +160,13 @@ def create_subset(label_data: dict, output_dir: str, subset_size: int) -> None:
     # Create subset of the dataset in the output directory
     total_selected = 0
     while total_selected < subset_size:
-        label_order, selected_file = iterate_labels(label_data, files_grouped_by_label, label_order, output_dir)
+        label_order, selected_file = iterate_labels(
+            label_data, files_grouped_by_label, label_order, output_dir
+        )
         if not selected_file:
             continue
         total_selected += 1
-    
+
 
 def count_labels(label_data: dict) -> dict:
     """
@@ -172,18 +192,18 @@ def plot_data(count_original: dict, count_subset: dict) -> None:
     values_subset = list(count_subset.values())
 
     plt.figure(figsize=(10, 6))
-    plt.bar(classes, values_original, color='blue', label='Original')
-    plt.bar(classes, values_subset, color='red', label='Subset')
+    plt.bar(classes, values_original, color="blue", label="Original")
+    plt.bar(classes, values_subset, color="red", label="Subset")
 
-    plt.xlabel('Classes')
-    plt.ylabel('Number of instances')
-    plt.title('Number of instances per class')
+    plt.xlabel("Classes")
+    plt.ylabel("Number of instances")
+    plt.title("Number of instances per class")
     plt.legend()
 
     plt.xticks([])
     plt.ylim(0, max(max(values_original), max(values_subset)))
 
-    plt.savefig(os.path.join(os.getcwd(), 'subset_distribution.png'))
+    plt.savefig(os.path.join(os.getcwd(), "subset_distribution.png"))
 
 
 def main():
@@ -191,10 +211,10 @@ def main():
     verify_args(args)
 
     label_dir = args.label_dir
-    label_json = os.path.join(os.getcwd(), f'label_{os.path.basename(label_dir)}.json')
+    label_json = os.path.join(os.getcwd(), f"label_{os.path.basename(label_dir)}.json")
     output_dir = args.output_dir
     subset_size = (args.percentage / 100) * len(os.listdir(label_dir))
-  
+
     # Create subset of the dataset
     labels = get_dataset_labels(label_dir, label_json)
     create_subset(labels, output_dir, subset_size)
@@ -209,5 +229,5 @@ def main():
     print("DONE")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
