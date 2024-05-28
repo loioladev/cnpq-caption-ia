@@ -12,7 +12,7 @@ def parse_args() -> argparse.Namespace:
     """
     parser = argparse.ArgumentParser(description='Create a subset of the original dataset.')
     parser.add_argument('label_dir', type=str, help='The path to the directory containing the labels.')
-    parser.add_argument('output_dir', type=str, help='The path to the directory where the subset will be saved.', default='./subset')
+    parser.add_argument('output_dir', type=str, help='The path to the directory where the subset will be saved.')
     parser.add_argument('percentage', type=int, help='The percentage of the original dataset that will be used [5-99]%.')
     return parser.parse_args()
 
@@ -27,6 +27,7 @@ def verify_args(args: argparse.Namespace) -> None:
         raise ValueError("The percentage must be between 5 and 99.")
     if os.path.exists(args.output_dir):
         raise FileExistsError(f"Directory '{args.output_dir}' already exists.")
+    os.makedirs(args.output_dir)
     
 
 def read_label_file(file_path: str) -> dict:
@@ -174,13 +175,15 @@ def plot_data(count_original: dict, count_subset: dict) -> None:
     fig, ax = plt.subplots()
 
     ax.bar(classes, values_original, bar_width, label='Original')
-    ax.bar(classes, values_subset, bar_width, label='Subset', bottom=values_original)
-
+    ax.bar(classes, values_subset, bar_width, label='Subset')
+    
     ax.set_xlabel('Classes')
     ax.set_ylabel('Number of instances')
     ax.set_title('Number of instances per class')
-    ax.set_xticks(classes)
     ax.legend()
+
+    ax.xaxis.set_ticks([])
+    ax.set_ylim(0, max(values_subset) + 1)
 
     plt.savefig(os.path.join(os.getcwd(), 'subset_distribution.png'))
 
