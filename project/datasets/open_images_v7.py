@@ -64,7 +64,7 @@ def main() -> None:
     dataset_name = "open-images-v7"
     for split in ["train", "validation"]:
         train_split = split == "train"
-        dataset = download_dataset(split, dataset_dir, dataset_name, split)
+        dataset = download_dataset(split, dataset_dir, dataset_name, train_split)
         if train_split:
             classes = dataset.default_classes
         export_dataset(dataset, dataset_dir, dataset_name, split, classes)

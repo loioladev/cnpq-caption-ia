@@ -1,13 +1,9 @@
 # Dataset path, which includes the following datasets: VOC, LVIS
 path: /media/matheus/Game/College/cnpq_caption/datasets/caption/
 train:
-  - images/voc_train2012
-  - images/voc_train2007
-  - images/voc_val2012
-  - images/lvis_train2017_subset20
+
 val:
-  - images/voc_val2007
-  - images/lvis_val2017_subset20
+
 
 # VOC, LVIS e OpenImagesV7
 
@@ -1218,3 +1214,113 @@ names:
   1202: yoke/yoke animal equipment
   1203: zebra
   1204: zucchini/courgette
+  1205: oboe
+  1206: office building
+  1207: office supplies
+  1208: organ (musical instrument)
+  1209: otter
+  1210: oyster
+  1211: palm tree
+  1212: paper cutter
+  1213: pasta
+  1214: personal care
+  1215: personal flotation device
+  1216: picnic basket
+  1217: picture frame
+  1218: pitcher (container)
+  1219: pizza cutter
+  1220: plant
+  1221: plumbing fixture
+  1222: pomegranate
+  1223: popcorn
+  1224: porch
+  1225: porcupine
+  1226: power plugs and sockets
+  1227: pressure cooker
+  1228: punching bag
+  1229: raccoon
+  1230: ratchet (device)
+  1231: raven
+  1232: rays and skates
+  1233: red panda
+  1234: reptile
+  1235: ring binder
+  1236: rocket
+  1237: roller skates
+  1238: rose
+  1239: rugby ball
+  1240: salt and pepper shakers
+  1241: scorpion
+  1242: sea lion
+  1243: sea turtle
+  1244: seafood
+  1245: seat belt
+  1246: segway
+  1247: serving tray
+  1248: shelf
+  1249: shellfish
+  1250: shotgun
+  1251: shower
+  1252: skull
+  1253: skunk
+  1254: skyscraper
+  1255: slow cooker
+  1256: snack
+  1257: snail
+  1258: snowplow
+  1259: soap dispenser
+  1260: sparrow
+  1261: sports equipment
+  1262: sports uniform
+  1263: squash (plant)
+  1264: stairs
+  1265: stationary bicycle
+  1266: stethoscope
+  1267: street light
+  1268: stretcher
+  1269: studio couch
+  1270: submarine
+  1271: submarine sandwich
+  1272: sun hat
+  1273: swan
+  1274: swim cap
+  1275: swimming pool
+  1276: table tennis racket
+  1277: tablet computer
+  1278: tableware
+  1279: tart
+  1280: tea
+  1281: television
+  1282: tent
+  1283: tick
+  1284: tire
+  1285: tool
+  1286: tortoise
+  1287: tower
+  1288: traffic sign
+  1289: training bench
+  1290: treadmill
+  1291: tree
+  1292: tree house
+  1293: trombone
+  1294: van
+  1295: vegetable
+  1296: vehicle
+  1297: vehicle registration plate
+  1298: volleyball (ball)
+  1299: waste container
+  1300: watercraft
+  1301: weapon
+  1302: whale
+  1303: whisk
+  1304: whiteboard
+  1305: willow
+  1306: window
+  1307: window blind
+  1308: wine
+  1309: wine glass
+  1310: wine rack
+  1311: winter melon
+  1312: wood-burning stove
+  1313: woodpecker
+  1314: worm
