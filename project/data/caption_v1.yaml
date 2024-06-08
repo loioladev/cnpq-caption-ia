@@ -1,17 +1,18 @@
 # Dataset path, which includes the following datasets: VOC, LVIS
-path: /media/matheus/Game/College/cnpq_caption/datasets/caption
+path: /media/matheus/Game/College/cnpq_caption/datasets/caption/
 train:
   - images/voc_train2012
   - images/voc_train2007
   - images/voc_val2012
-  - images/lvis_train2017
+  - images/lvis_train2017_subset20
 val:
   - images/voc_val2007
-  - images/lvis_val2017
+  - images/lvis_val2017_subset20
+
+# VOC e LVIS
 
 # Classes
 names:
-  # VOC ===========
   0: aeroplane
   1: bicycle
   2: bird
