@@ -37,7 +37,6 @@ def create_yolo_directory(src_path: str, new_path: str) -> None:
         shutil.rmtree(new_path)
     os.makedirs(new_path, exist_ok=True)
 
-
     for folder in os.listdir(src_path):
         new_folder_path = os.path.join(new_path, folder)
         folder_path = os.path.join(src_path, folder)
@@ -58,27 +57,26 @@ def convert_label(file_path: str, class_id: str, image_size: tuple) -> None:
     for line in lines:
         line = line.split(" ")
         # Calculate xywh
-        x, y, w, h = line[1], line[2], line[3], line[4]
-        x_center = (float(line[1]) + float(line[3])) / 2
-        y_center = (float(line[2]) + float(line[4])) / 2
-        width = float(line[3]) - float(line[1])
-        height = float(line[4]) - float(line[2])
+        x, y, w, h = int(line[1]), int(line[2]), int(line[3]), int(line[4])
+        x_center = x + (w // 2)
+        y_center = y + (h // 2)
+        width = w
+        height = h
 
         # Normalize
-        x_center /= image_size[1]
-        y_center /= image_size[0]
-        width /= image_size[1]
-        height /= image_size[0]
+        x_center /= image_size[0]
+        y_center /= image_size[1]
+        width /= image_size[0]
+        height /= image_size[1]
 
         new_line = f"{class_id} {x_center} {y_center} {width} {height}"
         new_lines.append(new_line)
 
     with open(file_path, "w") as f:
         f.write("\n".join(new_lines))
-    return
 
 
-def convert_labels_to_yolo(new_path: str, class_path: str) -> None:
+def get_class_dict(class_path: str) -> dict:
     # Read image class list file
     with open(class_path, "r") as f:
         class_files = f.readlines()
@@ -90,18 +88,29 @@ def convert_labels_to_yolo(new_path: str, class_path: str) -> None:
         class_file = class_file.split(" ")
         file_name = class_file[0].split(".")[0]
         class_dict[file_name] = class_file[1:]
+    return class_dict
+
+
+def convert_labels_to_yolo(new_path: str, class_path: str) -> None:
+    class_dict = get_class_dict(class_path)
 
     # Convert labels to yolo format
-    image_files = os.listdir(os.path.join(new_path, "images"))
-    label_files = os.listdir(os.path.join(new_path, "labels"))
+    images_path = os.path.join(new_path, "images")
+    image_files = [
+        os.path.join(images_path, image) for image in os.listdir(images_path)
+    ]
+    labels_path = os.path.join(new_path, "labels")
+    label_files = [
+        os.path.join(labels_path, label) for label in os.listdir(labels_path)
+    ]
     for image_file, label_file in zip(image_files, label_files):
         image = Image.open(image_file)
         width, height = image.size
-        
-        file_name = label_file.split(".")[0]
+
+        file_name = os.path.basename(label_file).split(".")[0]
         class_id = class_dict[file_name][LABEL_CLASS]
-        
-        convert_label(os.path.join(new_path,"labels",label_file), class_id, (width, height))
+
+        convert_label(label_file, class_id, (width, height))
 
     print("Labels converted successfully")
 
@@ -113,9 +122,10 @@ def images_to_jpg(dir_path: str) -> None:
         image_path = os.path.join(dir_path, image)
         img = Image.open(image_path)
         if img.mode != "RGB":
-            img = img.convert('RGB')
+            img = img.convert("RGB")
         new_image_path = image_path.split(".")[0] + ".jpg"
         img.save(new_image_path)
+        os.remove(image_path)
     print("Images converted successfully")
 
 
@@ -123,7 +133,34 @@ def image_enhancement(dir_path: str) -> None:
     pass
 
 
-def convert_dataset_to_yolo(src_path: str, new_path: str, class_list_path: str, enhancement_images: bool = False) -> None:
+def divide_dataset(new_path: str, class_path: str) -> None:
+    class_dict = get_class_dict(class_path)
+    images_path = os.path.join(new_path, "images")
+    labels_path = os.path.join(new_path, "labels")
+
+    new_folder_image = os.path.join(new_path, "images_subset")
+    new_folder_label = os.path.join(new_path, "labels_subset")
+    directories = ["train", "val", "test"]
+    for directory in directories:
+        os.makedirs(os.path.join(new_folder_image, directory), exist_ok=True)
+        os.makedirs(os.path.join(new_folder_label, directory), exist_ok=True)
+
+    for key, value in class_dict.items():
+        # Get images and labels
+        image_file = os.path.join(images_path, key + ".jpg")
+        label_file = os.path.join(labels_path, key + ".txt")
+        dest_dir = directories[int(value[3]) - 1]
+
+        # Copy images and labels
+        shutil.copy(image_file, os.path.join(new_folder_image, dest_dir, key + ".jpg"))
+        shutil.copy(label_file, os.path.join(new_folder_label, dest_dir, key + ".txt"))
+
+    print("Dataset divided successfully")
+
+
+def convert_dataset_to_yolo(
+    src_path: str, new_path: str, class_list_path: str, enhancement_images: bool = False
+) -> None:
     create_yolo_directory(src_path, new_path)
 
     images_to_jpg(os.path.join(new_path, "images"))
@@ -131,6 +168,7 @@ def convert_dataset_to_yolo(src_path: str, new_path: str, class_list_path: str, 
         image_enhancement(os.path.join(new_path, "images"))
 
     convert_labels_to_yolo(new_path, class_list_path)
+    divide_dataset(new_path, class_list_path)
 
 
 def main():
