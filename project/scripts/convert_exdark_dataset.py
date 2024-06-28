@@ -2,6 +2,7 @@ import os
 import shutil
 from PIL import Image
 import argparse
+import sys
 
 # 0 - labels
 # 1 - light
@@ -10,71 +11,74 @@ LABEL_CLASS = 0
 
 
 def create_parser() -> argparse.ArgumentParser:
+    """
+    Create argument parser for the script.
+    :return: A instance of the argument parser.
+    """
     parser = argparse.ArgumentParser(description="Convert ExDark dataset to YOLO format")
     parser.add_argument(
-        "--src_path",
+        "src_path",
         type=str,
-        required=True,
         help="Path to the ExDark dataset",
     )
     parser.add_argument(
-        "--new_path",
+        "new_path",
         type=str,
-        required=True,
         help="Path to the new directory to save the YOLO dataset",
     )
     parser.add_argument(
-        "--class_list_path",
+        "class_list_path",
         type=str,
-        required=True,
         help="Path to the class list file",
     )
     parser.add_argument(
         "--enhance_images",
         type=bool,
         default=False,
-        help="Enhance images",
+        help="Whether to enhance images to improve brightness and contrast",
     )
     return parser
 
 
-def convert_txt_file_name(files: list, new_path: str) -> str:
-    if not files[0].endswith(".txt"):
-        files = [os.path.basename(file) for file in files]
-        files = [os.path.join(new_path, file) for file in files]
-        return files
-
-    new_files = []
+def convert_txt_file_name(folder_path: str) -> str:
+    """
+    Remove aditional information from the label file names.
+    :param folder_path: Path to the folder containing the label files.
+    :return: List of new label files.
+    """
+    files = [os.path.join(folder_path, file) for file in os.listdir(folder_path)]
+    if not files or not files[0].endswith(".txt"):
+        return
+    
     for file in files:
-        file = os.path.basename(file)
-        new_file = file.split(".")[0] + ".txt"
-        new_file = os.path.join(new_path, new_file)
-        new_files.append(new_file)
-    return new_files
-
-
-def move_files(folders: list, new_path: str) -> None:
-    os.makedirs(new_path, exist_ok=True)
-    for folder in folders:
-        files = os.listdir(folder)
-        files = [os.path.join(folder, file) for file in files]
-        new_files = convert_txt_file_name(files, new_path)
-        [shutil.copy(file, new_file) for file, new_file in zip(files, new_files)]
+        new_file = os.path.basename(file).split(".")[0] + ".txt"
+        new_file = os.path.join(folder_path, new_file)
+        shutil.move(file, new_file)
 
 
 def create_yolo_directory(src_path: str, new_path: str) -> None:
+    """
+    Create YOLO directory structure and copy files.
+    :param src_path: Path to the ExDark dataset.
+    :param new_path: Path to the new directory to save the YOLO dataset.
+    """
     if os.path.exists(new_path):
-        shutil.rmtree(new_path)
-    os.makedirs(new_path, exist_ok=True)
+        user_decision = input(f"Path {new_path} exists. Delete it? (y/n): ")
+        shutil.rmtree(new_path) if user_decision.lower() == "y" else sys.exit()
 
-    for folder in os.listdir(src_path):
-        new_folder_path = os.path.join(new_path, folder)
-        folder_path = os.path.join(src_path, folder)
-        class_folders = os.listdir(folder_path)
-        class_folders = [
-            os.path.join(folder_path, class_folder) for class_folder in class_folders
-        ]
-        move_files(class_folders, new_folder_path)
+    os.makedirs(new_path)
+    for type_folder in os.listdir(src_path):
+        # Get labels and images folders
+        type_folder_path = os.path.join(src_path, type_folder)
+        new_type_folder_path = os.path.join(new_path, type_folder)
+
+        # Get classes folders and copy files
+        classes_folder = os.listdir(type_folder_path)
+        classes_folder = [os.path.join(type_folder_path, folder) for folder in classes_folder]
+        [shutil.copytree(class_folder, new_type_folder_path, dirs_exist_ok=True) for class_folder in classes_folder]
+
+        # Modify label files names
+        convert_txt_file_name(new_type_folder_path)
     print("Directory created successfully")
 
 
@@ -189,14 +193,21 @@ def divide_dataset(new_path: str, class_path: str) -> None:
 
 
 def convert_dataset_to_yolo(src_path: str, new_path: str, class_path: str, enhance_images: bool) -> None:
+    """
+    Convert ExDark dataset to YOLO format.
+    :param src_path: Path to the ExDark dataset.
+    :param new_path: Path to the new directory to save the YOLO dataset.
+    :param class_path: Path to the class list file.
+    :param enhance_images: Whether to enhance images or not.
+    """
     create_yolo_directory(src_path, new_path)
 
-    images_to_jpg(os.path.join(new_path, "images"))
-    if enhance_images:
-        image_enhancement(os.path.join(new_path, "images"))
+    # images_to_jpg(os.path.join(new_path, "images"))
+    # if enhance_images:
+    #     image_enhancement(os.path.join(new_path, "images"))
 
-    convert_labels_to_yolo(new_path, class_path)
-    divide_dataset(new_path, class_path)
+    # convert_labels_to_yolo(new_path, class_path)
+    # divide_dataset(new_path, class_path)
 
 
 def main():
