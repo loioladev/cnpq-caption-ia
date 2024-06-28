@@ -1,11 +1,41 @@
 import os
 import shutil
 from PIL import Image
+import argparse
 
 # 0 - labels
 # 1 - light
 # 2 - in/out
 LABEL_CLASS = 0
+
+
+def create_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Convert ExDark dataset to YOLO format")
+    parser.add_argument(
+        "--src_path",
+        type=str,
+        required=True,
+        help="Path to the ExDark dataset",
+    )
+    parser.add_argument(
+        "--new_path",
+        type=str,
+        required=True,
+        help="Path to the new directory to save the YOLO dataset",
+    )
+    parser.add_argument(
+        "--class_list_path",
+        type=str,
+        required=True,
+        help="Path to the class list file",
+    )
+    parser.add_argument(
+        "--enhance_images",
+        type=bool,
+        default=False,
+        help="Enhance images",
+    )
+    return parser
 
 
 def convert_txt_file_name(files: list, new_path: str) -> str:
@@ -158,24 +188,26 @@ def divide_dataset(new_path: str, class_path: str) -> None:
     print("Dataset divided successfully")
 
 
-def convert_dataset_to_yolo(
-    src_path: str, new_path: str, class_list_path: str, enhancement_images: bool = False
-) -> None:
+def convert_dataset_to_yolo(src_path: str, new_path: str, class_path: str, enhance_images: bool) -> None:
     create_yolo_directory(src_path, new_path)
 
     images_to_jpg(os.path.join(new_path, "images"))
-    if enhancement_images:
+    if enhance_images:
         image_enhancement(os.path.join(new_path, "images"))
 
-    convert_labels_to_yolo(new_path, class_list_path)
-    divide_dataset(new_path, class_list_path)
+    convert_labels_to_yolo(new_path, class_path)
+    divide_dataset(new_path, class_path)
 
 
 def main():
-    src_path = "/home/matheus/Downloads/ExDark"
-    new_path = "/home/matheus/Downloads/yolo_ExDark"
-    class_list_path = "/home/matheus/Downloads/imageclasslist.txt"
-    convert_dataset_to_yolo(src_path, new_path, class_list_path)
+    parser = create_parser()
+    args = parser.parse_args()
+
+    src_path = args.src_path
+    new_path = args.new_path
+    class_list_path = args.class_list_path
+    enhance_images = args.enhance_images
+    convert_dataset_to_yolo(src_path, new_path, class_list_path, enhance_images)
 
 
 if __name__ == "__main__":
