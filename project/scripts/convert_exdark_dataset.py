@@ -22,7 +22,7 @@ def create_parser() -> argparse.ArgumentParser:
         help="Path to the ExDark dataset",
     )
     parser.add_argument(
-        "new_path",
+        "yolo_path",
         type=str,
         help="Path to the new directory to save the YOLO dataset",
     )
@@ -56,21 +56,21 @@ def convert_txt_file_name(folder_path: str) -> str:
         shutil.move(file, new_file)
 
 
-def create_yolo_directory(src_path: str, new_path: str) -> None:
+def create_yolo_directory(src_path: str, yolo_path: str) -> None:
     """
     Create YOLO directory structure and copy files.
     :param src_path: Path to the ExDark dataset.
-    :param new_path: Path to the new directory to save the YOLO dataset.
+    :param yolo_path: Path to the new directory to save the YOLO dataset.
     """
-    if os.path.exists(new_path):
-        user_decision = input(f"Path {new_path} exists. Delete it? (y/n): ")
-        shutil.rmtree(new_path) if user_decision.lower() == "y" else sys.exit()
+    if os.path.exists(yolo_path):
+        user_decision = input(f"Path {yolo_path} exists. Delete it? (y/n): ")
+        shutil.rmtree(yolo_path) if user_decision.lower() == "y" else sys.exit()
 
-    os.makedirs(new_path)
+    os.makedirs(yolo_path)
     for type_folder in os.listdir(src_path):
         # Get labels and images folders
         type_folder_path = os.path.join(src_path, type_folder)
-        new_type_folder_path = os.path.join(new_path, type_folder)
+        new_type_folder_path = os.path.join(yolo_path, type_folder)
 
         # Get classes folders and copy files
         classes_folder = os.listdir(type_folder_path)
@@ -83,34 +83,46 @@ def create_yolo_directory(src_path: str, new_path: str) -> None:
 
 
 def convert_label(file_path: str, class_id: str, image_size: tuple) -> None:
+    """
+    Convert label file from ExDark format to YOLO format, in xywhn.
+    :param file_path: Path to the label file.
+    :param class_id: Class id of the label.
+    :param image_size: Size of the image in format (width, height).
+    """
+    # Open file and remove first line (unused)
     with open(file_path, "r") as f:
         lines = f.readlines()
     lines = lines[1:]
 
+    image_width = image_size[0]
+    image_height = image_size[1]
     new_lines = []
     for line in lines:
-        line = line.split(" ")
-        # Calculate xywh
-        x, y, w, h = int(line[1]), int(line[2]), int(line[3]), int(line[4])
-        x_center = x + (w // 2)
-        y_center = y + (h // 2)
-        width = w
-        height = h
+        line = line.split(" ")[1:]
 
-        # Normalize
-        x_center /= image_size[0]
-        y_center /= image_size[1]
-        width /= image_size[0]
-        height /= image_size[1]
+        # Calculate xywhn
+        x, y, w, h = map(float, line[:4])
+        x_center = (x + (w // 2)) / image_width
+        y_center = (y + (h // 2)) / image_height
+        width = w / image_width
+        height = h / image_height
 
+        # Add new line to list
         new_line = f"{class_id} {x_center} {y_center} {width} {height}"
         new_lines.append(new_line)
 
+    # Overwrite file with new labels
     with open(file_path, "w") as f:
         f.write("\n".join(new_lines))
 
 
 def get_class_dict(class_path: str) -> dict:
+    """
+    Get class dictionary from image class list file, which contains the 
+    class id, ambient light, ambient location and split.
+    :param class_path: Path to the class list file.
+    :return: Dictionary containing the class information.
+    """
     # Read image class list file
     with open(class_path, "r") as f:
         class_files = f.readlines()
@@ -125,55 +137,43 @@ def get_class_dict(class_path: str) -> dict:
     return class_dict
 
 
-def convert_labels_to_yolo(new_path: str, class_path: str) -> None:
+def convert_labels_to_yolo(yolo_path: str, class_path: str) -> None:
+    """
+    Convert folder of labels from ExDark format to YOLO format.
+    :param yolo_path: Path to the yolo directory.
+    :param class_path: Path to the class list file.
+    """
     class_dict = get_class_dict(class_path)
 
-    # Convert labels to yolo format
-    images_path = os.path.join(new_path, "images")
-    image_files = [
-        os.path.join(images_path, image) for image in os.listdir(images_path)
-    ]
-    labels_path = os.path.join(new_path, "labels")
-    label_files = [
-        os.path.join(labels_path, label) for label in os.listdir(labels_path)
-    ]
+    # Get image files path
+    images_path = os.path.join(yolo_path, "images")
+    image_files = [os.path.join(images_path, image) for image in os.listdir(images_path)]
+
+    # Get label files path
+    labels_path = os.path.join(yolo_path, "labels")
+    label_files = [os.path.join(labels_path, label) for label in os.listdir(labels_path)]
+
+    # Convert labels
     for image_file, label_file in zip(image_files, label_files):
         image = Image.open(image_file)
-        width, height = image.size
-
         file_name = os.path.basename(label_file).split(".")[0]
         class_id = class_dict[file_name][LABEL_CLASS]
-
-        convert_label(label_file, class_id, (width, height))
+        convert_label(label_file, class_id, image.size)
 
     print("Labels converted successfully")
-
-
-def images_to_jpg(dir_path: str) -> None:
-    for image in os.listdir(dir_path):
-        if image.endswith(".jpg"):
-            continue
-        image_path = os.path.join(dir_path, image)
-        img = Image.open(image_path)
-        if img.mode != "RGB":
-            img = img.convert("RGB")
-        new_image_path = image_path.split(".")[0] + ".jpg"
-        img.save(new_image_path)
-        os.remove(image_path)
-    print("Images converted successfully")
 
 
 def image_enhancement(dir_path: str) -> None:
     pass
 
 
-def divide_dataset(new_path: str, class_path: str) -> None:
+def divide_dataset(yolo_path: str, class_path: str) -> None:
     class_dict = get_class_dict(class_path)
-    images_path = os.path.join(new_path, "images")
-    labels_path = os.path.join(new_path, "labels")
+    images_path = os.path.join(yolo_path, "images")
+    labels_path = os.path.join(yolo_path, "labels")
 
-    new_folder_image = os.path.join(new_path, "images_subset")
-    new_folder_label = os.path.join(new_path, "labels_subset")
+    new_folder_image = os.path.join(yolo_path, "images_subset")
+    new_folder_label = os.path.join(yolo_path, "labels_subset")
     directories = ["train", "val", "test"]
     for directory in directories:
         os.makedirs(os.path.join(new_folder_image, directory), exist_ok=True)
@@ -192,22 +192,19 @@ def divide_dataset(new_path: str, class_path: str) -> None:
     print("Dataset divided successfully")
 
 
-def convert_dataset_to_yolo(src_path: str, new_path: str, class_path: str, enhance_images: bool) -> None:
+def convert_dataset_to_yolo(src_path: str, yolo_path: str, class_path: str, enhance_images: bool) -> None:
     """
     Convert ExDark dataset to YOLO format.
     :param src_path: Path to the ExDark dataset.
-    :param new_path: Path to the new directory to save the YOLO dataset.
+    :param yolo_path: Path to the new directory to save the YOLO dataset.
     :param class_path: Path to the class list file.
     :param enhance_images: Whether to enhance images or not.
     """
-    create_yolo_directory(src_path, new_path)
-
-    # images_to_jpg(os.path.join(new_path, "images"))
-    # if enhance_images:
-    #     image_enhancement(os.path.join(new_path, "images"))
-
-    # convert_labels_to_yolo(new_path, class_path)
-    # divide_dataset(new_path, class_path)
+    create_yolo_directory(src_path, yolo_path)
+    if enhance_images:
+        image_enhancement(os.path.join(yolo_path, "images"))
+    convert_labels_to_yolo(yolo_path, class_path)
+    # divide_dataset(yolo_path, class_path)
 
 
 def main():
@@ -215,10 +212,10 @@ def main():
     args = parser.parse_args()
 
     src_path = args.src_path
-    new_path = args.new_path
+    yolo_path = args.yolo_path
     class_list_path = args.class_list_path
     enhance_images = args.enhance_images
-    convert_dataset_to_yolo(src_path, new_path, class_list_path, enhance_images)
+    convert_dataset_to_yolo(src_path, yolo_path, class_list_path, enhance_images)
 
 
 if __name__ == "__main__":
