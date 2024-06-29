@@ -3,6 +3,7 @@ import os
 import shutil
 import sys
 
+import cv2
 import tqdm
 from PIL import Image
 
@@ -172,7 +173,26 @@ def convert_labels_to_yolo(yolo_path: str, class_path: str) -> None:
 
 
 def image_enhancement(images_path: str) -> None:
-    pass
+    """
+    Use CLAHE algorithm in images.
+    :param images_path: Path to the image directory.
+    """
+
+    for image in tqdm(os.listdir(images_path), desc="Applying CLAHE in images"):
+        image_path = os.path.join(images_path, image)
+        image = cv2.imread(image_path)
+
+        # Convert image to LAB and use CLAHE
+        lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
+        lab_planes = cv2.split(lab)
+        lab_planes_list = list(lab_planes)
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+        lab_planes_list[0] = clahe.apply(lab_planes_list[0])
+        lab = cv2.merge(lab_planes_list)
+        image = cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)
+
+        cv2.imwrite(image_path, image)
+    print("Images enhanced with CLAHE succesfully")
 
 
 def divide_dataset(yolo_path: str, class_path: str) -> None:
