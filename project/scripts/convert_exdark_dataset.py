@@ -11,7 +11,7 @@ from PIL import Image
 # 2 - in/out
 LABEL_CLASS = 0
 # https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html
-IMAGE_TYPE = "png"
+IMAGE_TYPE = "jpeg"
 
 
 def create_parser() -> argparse.ArgumentParser:
@@ -36,12 +36,6 @@ def create_parser() -> argparse.ArgumentParser:
         "class_list_path",
         type=str,
         help="Path to the class list file",
-    )
-    parser.add_argument(
-        "--enhance_images",
-        type=bool,
-        default=False,
-        help="Whether to enhance images to improve brightness and contrast",
     )
     return parser
 
@@ -80,8 +74,9 @@ def create_yolo_directory(src_path: str, yolo_path: str) -> None:
 
         # Get classes folders and copy files
         classes_folder = os.listdir(type_folder_path)
-        for folder in classes_folder:
-            os.path.join(type_folder_path, folder)
+        classes_folder = [
+            os.path.join(type_folder_path, folder) for folder in classes_folder
+        ]
         for class_folder in classes_folder:
             shutil.copytree(class_folder, new_type_folder_path, dirs_exist_ok=True)
 
@@ -164,17 +159,19 @@ def convert_labels_to_yolo(yolo_path: str, class_path: str) -> None:
     label_files = [
         os.path.join(labels_path, label) for label in os.listdir(labels_path)
     ]
+    image_files = sorted(image_files)
+    label_files = sorted(label_files)
 
     # Convert labels
     for image_file, label_file in zip(image_files, label_files):
         image_size = Image.open(image_file).size
         file_name = os.path.basename(label_file).split(".")[0]
-        class_id = class_dict[file_name][LABEL_CLASS]
+        class_id = int(class_dict[file_name][LABEL_CLASS]) - 1
         convert_label(label_file, class_id, image_size)
     print("Labels converted successfully")
 
 
-def image_enhancement(dir_path: str) -> None:
+def image_enhancement(images_path: str) -> None:
     pass
 
 
@@ -228,7 +225,6 @@ def convert_images_to_format(yolo_path: str, image_type: str) -> None:
         os.path.join(images_path, image) for image in os.listdir(images_path)
     ]
 
-    # use tqdm here
     progress_bar = tqdm.tqdm(image_files, desc="Converting images", unit="image")
     for image_file in progress_bar:
         if image_file.endswith(image_type):
@@ -237,26 +233,22 @@ def convert_images_to_format(yolo_path: str, image_type: str) -> None:
         if image.mode != "RGB":
             image = image.convert("RGB")
         new_image_file = image_file.split(".")[0] + "." + image_type
-        image.save(new_image_file, format=image_type.upper(), icc_profile=None)
+        image.save(new_image_file, format=image_type.upper())
         os.remove(image_file)
     print("Images converted successfully")
 
 
-def convert_dataset_to_yolo(
-    src_path: str, yolo_path: str, class_path: str, enhance_images: bool
-) -> None:
+def convert_dataset_to_yolo(src_path: str, yolo_path: str, class_path: str) -> None:
     """
     Convert ExDark dataset to YOLO format.
     :param src_path: Path to the ExDark dataset.
     :param yolo_path: Path to the new directory to save the YOLO dataset.
     :param class_path: Path to the class list file.
-    :param enhance_images: Whether to enhance images or not.
     """
     create_yolo_directory(src_path, yolo_path)
-    if enhance_images:
-        image_enhancement(os.path.join(yolo_path, "images"))
     convert_images_to_format(yolo_path, IMAGE_TYPE)
     convert_labels_to_yolo(yolo_path, class_path)
+    image_enhancement(os.path.join(yolo_path, "images"))
     divide_dataset(yolo_path, class_path)
 
 
@@ -266,8 +258,7 @@ def main():
     src_path = args.src_path
     yolo_path = args.yolo_path
     class_list_path = args.class_list_path
-    enhance_images = args.enhance_images
-    convert_dataset_to_yolo(src_path, yolo_path, class_list_path, enhance_images)
+    convert_dataset_to_yolo(src_path, yolo_path, class_list_path)
 
 
 if __name__ == "__main__":
