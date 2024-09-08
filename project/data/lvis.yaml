@@ -1,18 +1,12 @@
-# Ultralytics YOLO 🚀, AGPL-3.0 license
-# LVIS dataset http://www.lvisdataset.org by Facebook AI Research.
-# Documentation: https://docs.ultralytics.com/datasets/detect/lvis/
-# Example usage: yolo train data=lvis.yaml
-# parent
-# ├── ultralytics
-# └── datasets
-#     └── lvis  ← downloads here (20.1 GB)
+# Datasets folder path
+path: <path>
 
-# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
-path: /media/matheus/Game/College/cnpq_caption/datasets/lvis # dataset root dir
-train: train.txt # train images (relative to 'path') 100170 images
-val: val.txt # val images (relative to 'path') 19809 images
-minival: minival.txt # minval images (relative to 'path') 5000 images
+# Path to respective datasets
+train: train.txt 
+val: val.txt 
+minival: minival.txt 
 
+# Classes of LVIS Dataset
 names:
   0: aerosol can/spray can
   1: air conditioner
@@ -1221,19 +1215,3 @@ names:
   1200: yoke/yoke animal equipment
   1201: zebra
   1202: zucchini/courgette
-
-# Download script/URL (optional)
-download: |
-  from ultralytics.utils.downloads import download
-  from pathlib import Path
-
-  # Download labels
-  dir = Path(yaml['path'])  # dataset root dir
-  url = 'https://github.com/ultralytics/yolov5/releases/download/v1.0/'
-  urls = [url + 'lvis-labels-segments.zip']  # labels
-  download(urls, dir=dir.parent)
-  # Download data
-  urls = ['http://images.cocodataset.org/zips/train2017.zip',  # 19G, 118k images
-          'http://images.cocodataset.org/zips/val2017.zip',  # 1G, 5k images
-          'http://images.cocodataset.org/zips/test2017.zip']  # 7G, 41k images (optional)
-  download(urls, dir=dir / 'images', threads=3)

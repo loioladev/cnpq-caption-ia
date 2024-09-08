@@ -1,11 +1,8 @@
-path: /home/matheus/Download/ExDark
+path: <path>
 
-train:
-  images_subset/train
-val:
-  images_subset/val
-test:
-  images_subset/test
+train: images/train
+val: images/val
+test: images/test
 
 names:
   0: Bicycle

@@ -1,13 +1,19 @@
-# Dataset path, which includes the following datasets: VOC, LVIS
-path: /media/matheus/Game/College/cnpq_caption/datasets/caption/
+# Datasets folder path
+path: <path>
+
+# Path to respective datasets
 train:
-
+  - images/v2_lvis_train2017
+  - images/v2_openimages_train
+  - images/v2_voc_train2007
+  - images/v2_voc_train2012
 val:
+  - images/v2_lvis_val2017
+  - images/v2_openimages_val
+  - images/v2_voc_val2007
+  - images/v2_voc_val2012
 
-
-# VOC, LVIS e OpenImagesV7
-
-# Classes
+# Classes of VOC, LVIS and OpenImagesV7 datasets
 names:
   0: motorbike
   1: pottedplant
