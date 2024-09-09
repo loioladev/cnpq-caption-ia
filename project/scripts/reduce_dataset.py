@@ -1,3 +1,14 @@
+"""
+Reduce the size of the dataset by selecting a subset of the original dataset.
+
+The script reads the labels of the dataset and creates a subset with a percentage
+of the original dataset. The subset is created by selecting the files with the
+lowest number of instances of each class.
+
+Example:
+    python reduce_dataset.py <label_dir> <output_dir> <percentage>
+"""
+
 import argparse
 import json
 import os
@@ -11,6 +22,7 @@ from tqdm import tqdm
 def parse_args() -> argparse.Namespace:
     """
     Create parser for command line arguments.
+
     :return: The parsed arguments.
     """
     parser = argparse.ArgumentParser(
@@ -35,6 +47,7 @@ def parse_args() -> argparse.Namespace:
 def verify_args(args: argparse.Namespace) -> None:
     """
     Verify if the arguments are valid.
+
     :param args: The parsed arguments.
     """
     if not os.path.isdir(args.label_dir):
@@ -48,6 +61,7 @@ def verify_args(args: argparse.Namespace) -> None:
 def read_label_file(file_path: str) -> dict:
     """
     Read the labels of the given file.
+
     :param file_path: The path to the file containing the labels.
     :return: A dictionary containing the labels of the file.
     """
@@ -65,6 +79,7 @@ def read_label_file(file_path: str) -> dict:
 def get_labels_from_directory(directory_path: str) -> dict:
     """
     Read the labels of each file in the given directory.
+
     :param directory_path: The path to the directory containing the labels.
     :return: A dictionary containing the labels of each file.
     """
@@ -82,6 +97,7 @@ def get_labels_from_directory(directory_path: str) -> dict:
 def get_dataset_labels(label_dir: str, label_json_path: str) -> dict:
     """
     Get the labels of each file in the dataset.
+
     :param label_dir: The path to the directory containing the labels.
     :param label_json: The path to the JSON file containing the labels.
     :return: A dictionary containing the labels of each file.
@@ -100,6 +116,7 @@ def get_dataset_labels(label_dir: str, label_json_path: str) -> dict:
 def remove_many_instances(label_data: dict) -> dict:
     """
     Remove labels that have more than 50 instances of the same class.
+
     :param label_data: A dictionary containing the labels of each file.
     :return: A dictionary containing the labels of each file without many instances.
     """
@@ -123,6 +140,7 @@ def iterate_labels(
 ) -> tuple:
     """
     Iterate over labels to find the file to add to the subset and update label counts.
+
     :param label_data: A dictionary containing the labels of each file.
     :param files_grouped_by_label: A dictionary containing the files grouped by label.
     :param label_order: A list containing the number of instances of each class.
@@ -131,16 +149,16 @@ def iterate_labels(
     """
     # Find the class with the lowest number of instances
     min_label_idx = 0
-    lowest_count = float("inf")
+    lowest_count = 10000000
     for i, (count, label) in enumerate(label_order):
         if count < lowest_count:
             lowest_count = count
             min_label_idx = i
 
     # Select the file with the lowest number of instances
-    selected_label = label_order[min_label_idx][1]
-    if not files_grouped_by_label[selected_label]:
-        label_order[min_label_idx] = (float("inf"), selected_label)
+    selected_label = str(label_order[min_label_idx][1])
+    if len(files_grouped_by_label[selected_label]) == 0:
+        label_order[min_label_idx] = (10000000, selected_label)
         return label_order, None
     selected_file, _ = files_grouped_by_label[selected_label].pop()
 
@@ -164,6 +182,7 @@ def iterate_labels(
 def create_subset(label_data: dict, output_dir: str, subset_size: int) -> None:
     """
     Create a subset of the dataset.
+
     :param label_data: A dictionary containing the labels of each file.
     :param output_dir: The path to the directory where the subset will be saved.
     :param subset_size: The number of files in the subset.
@@ -199,6 +218,7 @@ def create_subset(label_data: dict, output_dir: str, subset_size: int) -> None:
 def count_labels(label_data: dict) -> dict:
     """
     Count the number of instances of each class in the dataset.
+
     :param label_data: A dictionary containing the labels of each file.
     :return: A dictionary containing the number of instances of each class.
     """
@@ -212,6 +232,7 @@ def count_labels(label_data: dict) -> dict:
 def plot_data(count_original: dict, count_subset: dict) -> None:
     """
     Plot the number of instances of each class in the original and subset datasets.
+
     :param count_original: A dictionary containing the number of instances of each class in the original dataset.
     :param count_subset: A dictionary containing the number of instances of each class in the subset dataset.
     """
