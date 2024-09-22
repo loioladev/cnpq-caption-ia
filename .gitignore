@@ -1,2 +1,6 @@
+# Virtual Environments
 env
 venv
+
+# Model weights
+**/weights/
