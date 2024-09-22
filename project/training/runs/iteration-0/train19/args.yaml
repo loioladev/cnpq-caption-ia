@@ -1,6 +1,6 @@
 task: detect
 mode: train
-model: <>
+model: yolov8n.pt
 data: <>
 epochs: 40
 time: null
