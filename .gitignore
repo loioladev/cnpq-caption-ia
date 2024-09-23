@@ -2,5 +2,8 @@
 env
 venv
 
+# Python pycache
+__pycache__/
+
 # Model weights
 **/weights/

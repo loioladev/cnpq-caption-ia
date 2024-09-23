@@ -61,4 +61,18 @@ def train_in_out_model(dataset_path: str, model: str, resume: bool) -> None:
     :param model: The path to the model or the model name
     :param resume: Resume training
     """
-    pass
+    model = YOLO(model)
+    results = model.train(
+        data=dataset_path,
+        epochs=60,
+        imgsz=640,
+        project="inout_classification",
+        seed=SEED,
+        batch=4,
+        cache=True,
+        patience=25,
+        resume=resume,
+    )
+
+    return results
+

@@ -2,7 +2,7 @@ import argparse
 import os
 import shutil
 
-label_type = "light"
+label_type = "inout"
 
 light_class = {
     "1": "Low",
@@ -49,7 +49,7 @@ def convert_to_class(path_to_images: str, path_to_labels: str, label_path: str) 
     # Name | Class | Light | In/Out | Train/Val/Test
     for line in labels:
         image_name, class_, light, in_out, train_val_test = line.split(" ")
-        image_name = image_name.split(".")[0] + ".jpg"
+        image_name = image_name.split(".")[0] + ".jpeg"
 
         if label_type == "light":
             classification = light_class[light]
