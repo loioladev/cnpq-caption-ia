@@ -1,6 +1,6 @@
 # Image Captioning System
 
-This repository contains both the research and project implementation of an **Image Captioning System**. The project combines natural language processing (NLP) and computer vision techniques to generate descriptive captions for images. It explores the latest methodologies in the field, such as Convolutional Neural Networks (CNNs) for image processing and Recurrent Neural Networks (RNNs), particularly LSTMs, for text generation.
+This repository contains both the research and project implementation of an **Image Captioning System** that received an [Honourable Mention](https://ifb.edu.br/attachments/article/40369/Listas%20de%20Men%C3%A7%C3%A3o%20Honrosa%20-%20CICDF2024%20-%20IFB.pdf) at the 30th Congress of Scientific Initiation (UnB) and 21st Congress of the Federal District, Brazil. The project combines natural language processing (NLP) and computer vision techniques to generate descriptive captions for images. It explores the latest methodologies in the field, such as Convolutional Neural Networks (CNNs) for image processing and Recurrent Neural Networks (RNNs), particularly LSTMs, for text generation. 
 
 ## Table of Contents
 - [Project Overview](#project-overview)
